@@ -72,10 +72,10 @@ define(function(require) {
 	/* server upload ------------------------------------------------------------ */
 	function serverUpload(accessPoint,uploadOnSave,_item,_remotePath) {
 		
-		if( uploadCheck ){
+		/*if( uploadCheck ){
 			alert(STRINGS.TXT_START_UPLOADING_Q_NOW);
 			return false;
-		}
+		}*/
 		
 		FL_MANAGER.panelOpen();
 		
@@ -132,7 +132,7 @@ define(function(require) {
 			
 			if(serverConnectionSetting.host){
 				
-				uploadCheck = true;
+				//uploadCheck = true;
 				
 				FL_MANAGER.outputLog('<span class="log start"><span class="o">[' + STRINGS.TXT_START_UPLOADING_Q + auto + ']</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d">' + item_full + "&nbsp;--->&nbsp;" + serverConnectionSetting.host + "/" +  serverConnectionSetting.serverPath + remotePath + '</span></span>');
 				
@@ -186,7 +186,7 @@ define(function(require) {
 		
 		$(_nodeDomain).on('jobCompleted', function(err, msg){
 			FL_MANAGER.outputLog('<span class="log complete"><span class="o">[' + STRINGS.TXT_UPLOADING_COMP_Q + ']</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d"></span></span>');
-			uploadCheck = false;
+			//uploadCheck = false;
 		});
 		
 		$(_nodeDomain).on('error', function(err, msg){
@@ -194,7 +194,7 @@ define(function(require) {
 			if(errorTxt != _errorTxt){
 				FL_MANAGER.outputLog('<span class="log error"><span class="o">[ERROR]</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d">' + msg + '</span></span>');
 				errorTxt = _errorTxt;
-				uploadCheck = false;
+				//uploadCheck = false;
 			}
 		});
 		
