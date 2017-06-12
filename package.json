@@ -1,0 +1,23 @@
+{
+	"name": "au.brackets-simple-sftp-upload",
+	"title": "Simple Sftp Upload",
+	"description": "Simple FTP / SFTP client. It is possible to set the test environment / production environment, upload in units of file / folder, can upload files modified on Brackets automatically, can write and read the connection setting file.",
+	"homepage": "",
+	"version": "1.2.0",
+	"keywords": ["sftp","ftp","sync", "upload", "uploader", "simple"],
+	"author": "Atsushi Umehara",
+	"license": "MIT",
+	"engines": {
+		"brackets": ">=1.8.0"
+	},
+	"i18n": [
+		"en",
+		"ja"
+	],
+	"package-i18n": {
+		"ja":{
+			"description": "シンプルなFTP／SFTPクライアント。テスト環境／本番環境の設定が可能、ファイル単位／フォルダ単位でのアップロードが可能、Brackets上で変更されたファイルを自動でアップロードが可能、接続設定ファイルの書き出し、読み込みが可能。",
+			"title": "簡単SFTP"
+		}
+	}
+}

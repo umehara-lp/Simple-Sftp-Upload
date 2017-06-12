@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+
+/* configuration_dialog --------------------------------------- */
+#au-ssftp-configuration_dialog {}
+#au-ssftp-configuration_dialog .description { padding-bottom: 20px; margin-bottom: 20px; border-bottom: solid 1px #444; }
+#au-ssftp-configuration_dialog table { width: 100%; }
+#au-ssftp-configuration_dialog table th, #au-ssftp-configuration_dialog .modal-body table td { vertical-align: middle; text-align: left; }
+#au-ssftp-configuration_dialog table th { width: 100px; }
+#au-ssftp-configuration_dialog table td {}
+#au-ssftp-configuration_dialog table input { width: 300px; }
+#au-ssftp-configuration_dialog table span { vertical-align: middle; }
+
+
+/* connection_dialog --------------------------------------- */
+#au-ssftp-connection_dialog {}
+#au-ssftp-connection_dialog h2 { font-size: 18px; }
+#au-ssftp-connection_dialog table { width: 100%; }
+#au-ssftp-connection_dialog table th, #au-ssftp-connection_dialog .modal-body table td { vertical-align: middle; text-align: left; }
+#au-ssftp-connection_dialog table th { width: 110px; }
+#au-ssftp-connection_dialog table td {}
+#au-ssftp-connection_dialog table input[type="text"] { width: 280px; }
+#au-ssftp-connection_dialog table span { vertical-align: middle; }
+#au-ssftp-connection_dialog .nav-tabs { padding-top: 20px; }
+#au-ssftp-connection_dialog .tab-content { overflow: inherit; }
+#au-ssftp-connection_dialog .tab-pane { padding: 20px 0; }
+#au-ssftp-connection_dialog .input-port, #au-ssftp-connection_dialog .input-port-p { width: 40px !important; }
+
+
+/* ftp_log_panel --------------------------------------- */
+#au-ssftp-ftp_log_panel {}
+#au-ssftp-ftp_log_panel ul { overflow: scroll; height: 90%; }
+#au-ssftp-ftp_log_panel ul .log { display: block; border-bottom: solid 1px #444; }
+#au-ssftp-ftp_log_panel ul .o, #au-ssftp-ftp_log_panel ul .e, #au-ssftp-ftp_log_panel ul .t, #au-ssftp-ftp_log_panel ul .d { display: inline-block; }
+#au-ssftp-ftp_log_panel ul .o { width: 200px; }
+#au-ssftp-ftp_log_panel ul .e { width: 150px; }
+#au-ssftp-ftp_log_panel ul .t { width: 200px; }
+#au-ssftp-ftp_log_panel ul .d {}
+#au-ssftp-ftp_log_panel ul .warning .o { color: #FFD24D; }
+#au-ssftp-ftp_log_panel ul .error .o { color: #FF2626; }
+#au-ssftp-ftp_log_panel ul .start .o { color: #00A3D9; }
+#au-ssftp-ftp_log_panel ul .complete .o { color: #6DD900; }
+
