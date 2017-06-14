@@ -3,7 +3,7 @@
 	"title": "Simple Sftp Upload",
 	"description": "Simple FTP / SFTP client. It is possible to set the test environment / production environment, upload in units of file / folder, can upload files modified on Brackets automatically, can write and read the connection setting file.",
 	"homepage": "https://github.com/umehara-lp/Simple-Sftp-Upload",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"keywords": ["sftp","ftp","sync", "upload", "uploader", "simple"],
 	"author": "Atsushi Umehara",
 	"license": "MIT",
