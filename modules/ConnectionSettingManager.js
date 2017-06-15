@@ -61,21 +61,21 @@ define(function(require) {
 			connectingName:	$dialog_connection.find('.input-connecting-name').val(),
 			
 			method:				$dialog_connection.find('.input-method').val(),
-			host:					pathExchange($dialog_connection.find('.input-host').val(), false, false),
+			host:					pathExchange($dialog_connection.find('.input-host').val(), "false", "false"),
 			port:					$dialog_connection.find('.input-port').val(),
 			username:			$dialog_connection.find('.input-username').val(),
-			rsaPath:				pathExchange($dialog_connection.find('.input-rsa-path').val(), false, false),
+			rsaPath:				pathExchange($dialog_connection.find('.input-rsa-path').val(), "false", "false"),
 			password:			$dialog_connection.find('.input-password').val(),
-			serverPath:			pathExchange($dialog_connection.find('.input-server-path').val(), false, true),
+			serverPath:			pathExchange($dialog_connection.find('.input-server-path').val(), "through", "true"),
 			save:					$dialog_connection.find('.input-save').is(':checked'),
 			
 			method_p:			$dialog_connection.find('.input-method-p').val(),
-			host_p:				pathExchange($dialog_connection.find('.input-host-p').val(), false, false),
+			host_p:				pathExchange($dialog_connection.find('.input-host-p').val(), "false", "false"),
 			port_p:				$dialog_connection.find('.input-port-p').val(),
 			username_p:			$dialog_connection.find('.input-username-p').val(),
-			rsaPath_p:			pathExchange($dialog_connection.find('.input-rsa-path-p').val(), false, false),
+			rsaPath_p:			pathExchange($dialog_connection.find('.input-rsa-path-p').val(), "false", "false"),
 			password_p:			$dialog_connection.find('.input-password-p').val(),
-			serverPath_p:		pathExchange($dialog_connection.find('.input-server-path-p').val(), false, true)
+			serverPath_p:		pathExchange($dialog_connection.find('.input-server-path-p').val(), "through", "true")
 		};
 		
 	}
@@ -87,14 +87,14 @@ define(function(require) {
 		var path = _path;
 		if(path){
 			path = path.replace(/\\|\\/g, '/');
-			if(slashStart){
+			if(slashStart == "true"){
 				if(path.slice(0, 1) != "/")  path = "/" + path;
-			}else{
+			}else if(slashStart == "false"){
 				if(path.slice(0, 1) == "/")  path = path.substr(1);
 			}
-			if(slashEnd){
+			if(slashEnd == "true"){
 				if(path.slice(-1) != "/")  path += "/";
-			}else{
+			}else if(slashEnd == "false"){
 				if(path.slice(-1) == "/")  path = path.substr(0, path.length-1);
 			}
 		}
