@@ -223,16 +223,28 @@ define(function(require) {
 	function setUploadOnSave(){
 		
 		FileSystem.on( 'change', function( event, entry, created, deleted ) {
-			
+			if(deleted && deleted.length > 0){
+				return;
+			}
 			if(entry !== null){
-				var path = entry._path,
-					 projectUrl = ProjectManager.getProjectRoot().fullPath;
-				
-				if( path.indexOf(projectUrl) === 0 ){
-					serverUpload("test", true, path, path.replace(projectUrl, ''));
+				if(entry._isDirectory && created.length > 0){
+					created.forEach(function(entry, i, arr){
+						var path = entry._path,
+							 projectUrl = ProjectManager.getProjectRoot().fullPath;
+						
+						if( path.indexOf(projectUrl) === 0 ){
+							serverUpload("test", true, path, path.replace(projectUrl, ''));
+						}
+					});
+				} else {
+					var path = entry._path,
+						 projectUrl = ProjectManager.getProjectRoot().fullPath;
+					
+					if( path.indexOf(projectUrl) === 0 ){
+						serverUpload("test", true, path, path.replace(projectUrl, ''));
+					}
 				}
 			}
-			
 		});
 		
 	}

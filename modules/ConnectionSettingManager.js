@@ -12,6 +12,7 @@ define(function(require) {
 		 P_MANAGER						= require("modules/PreferencesManager"),
 		 CF_MANAGER						= require("modules/ConfigurationManager"),
 		 STRINGS							= require("modules/Strings"),
+		 SteReadFunctions				= require("modules/SteReadFunctions"),
 		 DRAG_AND_MOVE					= require("modules/DragAndMove"),
 		 
 		 dialog_connection_tmp		= require("text!html/dialog_connection.html"),
@@ -121,6 +122,10 @@ define(function(require) {
 	
 	/* loadConnectionSetting ------------------------------------------------------------ */
 	function loadConnectionSetting(load_file,callback) {
+		
+		if(load_file && SteReadFunctions.isSte(load_file, $dialog_connection)){
+			return;
+		}
 		
 		var projectRoot = ProjectManager.getProjectRoot(), fileEntry, fileContent, fileSettings = {};
 		
