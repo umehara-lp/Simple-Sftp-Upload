@@ -174,22 +174,22 @@ define(function(require) {
 	/* setUploadEvent ------------------------------------------------------------ */
 	function setUploadEvent(){
 		
-		$(_nodeDomain).on('uploading', function(obj, remotePath){
+		_nodeDomain.on('uploading', function(obj, remotePath){
 			var uid = getUniqueId(remotePath);
 			FL_MANAGER.outputLog('<span class="log"><span id="' + uid + '" class="o">[' + STRINGS.TXT_UPLOADING + ']</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d">' + remotePath+ '</span></span>');
 		});
 		
-		$(_nodeDomain).on('uploaded', function(obj, remotePath){
+		_nodeDomain.on('uploaded', function(obj, remotePath){
 			var uid = getUniqueId(remotePath);
 			$("#" + uid).html("[" + STRINGS.TXT_UPLOADING_COMP + "]");
 		});
 		
-		$(_nodeDomain).on('jobCompleted', function(err, msg){
+		_nodeDomain.on('jobCompleted', function(err, msg){
 			FL_MANAGER.outputLog('<span class="log complete"><span class="o">[' + STRINGS.TXT_UPLOADING_COMP_Q + ']</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d"></span></span>');
 			//uploadCheck = false;
 		});
 		
-		$(_nodeDomain).on('error', function(err, msg){
+		_nodeDomain.on('error', function(err, msg){
 			var _errorTxt = '<span class="log error"><span class="o">[ERROR]</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d">' + msg + '</span></span>';
 			if(errorTxt != _errorTxt){
 				FL_MANAGER.outputLog('<span class="log error"><span class="o">[ERROR]</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d">' + msg + '</span></span>');

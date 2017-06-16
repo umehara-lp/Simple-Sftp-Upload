@@ -3,7 +3,8 @@ define(function(require) {
 	
 	var Strings							= brackets.getModule("strings"),
 		 CommandManager				= brackets.getModule("command/CommandManager"),
-		 PanelManager					= brackets.getModule("view/PanelManager"),
+		 WorkspaceManager					= brackets.getModule("view/WorkspaceManager"),
+		 Mustache						= brackets.getModule("thirdparty/mustache/mustache"),
 		
 		 STRINGS							= require("modules/Strings"),
 		 
@@ -63,7 +64,7 @@ define(function(require) {
 		CommandManager.register(STRINGS.TXT_FTP_LOG, mid, panelToggle);
 		menu.addMenuItem(mid);
 		
-		panel = PanelManager.createBottomPanel(mid, $(Mustache.render(dialog_ftp_log_tmp, context)),50);
+		panel = WorkspaceManager.createBottomPanel(mid, $(Mustache.render(dialog_ftp_log_tmp, context)),50);
 		$panel = $("#au-ssftp-ftp_log_panel");
 		
 		$panel.on( 'click', '.close,.title', function() {

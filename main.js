@@ -13,6 +13,7 @@ define(function(require, exports, module) {
 		 CS_MANAGER						= require("modules/ConnectionSettingManager"),
 		 FL_MANAGER						= require("modules/FtpLogManager"),
 		 SFTP_MANAGER					= require("modules/SftpManager"),
+		 SFTP_SV_MANAGER				= require("modules/SftpServerManager"),
 		 STRINGS							= require("modules/Strings"),
 		
 		 packageJSON					= require("text!package.json"),
@@ -31,7 +32,8 @@ define(function(require, exports, module) {
 			 menuId2 = packageName + ".menu2",
 			 menuId3 = packageName + ".menu3",
 			 menuId4 = packageName + ".menu4",
-			 menuId5 = packageName + ".menu5";
+			 menuId5 = packageName + ".menu5",
+			 menuId6 = packageName + ".menu6";
 		
 		if(!menu) {
 			menu = Menus.addMenu(STRINGS.EXTENSION_NAME, packageName, Menus.BEFORE, Menus.AppMenuBar.HELP_MENU);
@@ -41,6 +43,8 @@ define(function(require, exports, module) {
 		CS_MANAGER.addMenu(menu, menuId2);
 		menu.addMenuDivider();
 		CF_MANAGER.addMenu(menu, menuId1);
+		menu.addMenuDivider();
+		SFTP_SV_MANAGER.addMenu(menu, menuId6);
 		menu.addMenuDivider();
 		FL_MANAGER.addMenu(menu, menuId3);
 		
@@ -64,6 +68,7 @@ define(function(require, exports, module) {
 		addMenu();
 		
 		SFTP_MANAGER.init(_nodeDomain);
+		SFTP_SV_MANAGER.init(_nodeDomain);
 		
 		if(!P_MANAGER.get("_storageLocation")) {
 			CF_MANAGER.openDialog();

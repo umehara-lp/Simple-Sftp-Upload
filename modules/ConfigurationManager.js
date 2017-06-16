@@ -5,6 +5,7 @@ define(function(require) {
 		 CommandManager				= brackets.getModule("command/CommandManager"),
 		 Dialogs							= brackets.getModule("widgets/Dialogs"),
 		 FileSystem						= brackets.getModule("filesystem/FileSystem"),
+		 Mustache						= brackets.getModule("thirdparty/mustache/mustache"),
 		
 		 P_MANAGER						= require("modules/PreferencesManager"),
 		 STRINGS							= require("modules/Strings"),

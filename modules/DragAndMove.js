@@ -1,8 +1,15 @@
 define(function(require) {
 	"use strict";
+	var P_MANAGER						= require("modules/PreferencesManager");
 
 
 	function drag_and_move(dropZone, obj) {
+		var prefid = dropZone.id;
+		if(P_MANAGER.get("au.drag_and_move"+"_"+prefid+".x")){dropZone.style.left = P_MANAGER.get("au.drag_and_move"+"_"+prefid+".x");}
+		if(P_MANAGER.get("au.drag_and_move"+"_"+prefid+".y")){dropZone.style.top = P_MANAGER.get("au.drag_and_move"+"_"+prefid+".y");}
+		if(P_MANAGER.get("au.drag_and_move"+"_"+prefid+".w")){dropZone.style.width = P_MANAGER.get("au.drag_and_move"+"_"+prefid+".w");}
+		if(P_MANAGER.get("au.drag_and_move"+"_"+prefid+".h")){dropZone.style.height = P_MANAGER.get("au.drag_and_move"+"_"+prefid+".h");}
+
 		var x,
 			y,
 			dropZoneStyle,
@@ -14,7 +21,10 @@ define(function(require) {
 		if (obj && obj.dragZone) {
 			dragZone = document.querySelector(obj.dragZone);
 			dragZone.style.cursor = "move";
+			dropZone.style.minHeight = dragZone.clientHeight + "px";
 		}
+
+		dropZone.style.setProperty('overflow', 'hidden', 'important');
 
 		if (obj && obj.resizer === true) {
 			var resizer = document.createElement("div");
@@ -35,8 +45,6 @@ define(function(require) {
 			dropZone.appendChild(resizer);
 			var dropZoneW,
 				dropZoneH,
-				dropZoneX,
-				dropZoneY,
 				resizeMode = false;
 
 			resizer.addEventListener("mousedown", function(e) {
@@ -64,6 +72,10 @@ define(function(require) {
 					dropZone.style.height = dropZoneH + plusY + "px";
 					dropZone.style.left = dropZoneX + plusX / 2 + "px";
 					dropZone.style.top = dropZoneY + plusY / 2 + "px";
+					P_MANAGER.set("au.drag_and_move"+"_"+prefid+".w", dropZoneW + plusX + "px");
+					P_MANAGER.set("au.drag_and_move"+"_"+prefid+".h", dropZoneH + plusY + "px");
+					P_MANAGER.set("au.drag_and_move"+"_"+prefid+".x", dropZoneX + plusX / 2 + "px");
+					P_MANAGER.set("au.drag_and_move"+"_"+prefid+".y", dropZoneY + plusY / 2 + "px");
 				}
 			});
 		}
@@ -95,6 +107,8 @@ define(function(require) {
 				var plusY = e.clientY - y;
 				dropZone.style.left = dropZoneX + plusX + "px";
 				dropZone.style.top = dropZoneY + plusY + "px";
+				P_MANAGER.set("au.drag_and_move"+"_"+prefid+".x", dropZoneX + plusX + "px");
+				P_MANAGER.set("au.drag_and_move"+"_"+prefid+".y", dropZoneY + plusY + "px");
 			}
 		});
 	}

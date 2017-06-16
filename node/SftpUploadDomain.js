@@ -205,14 +205,14 @@
                 _domainManager.emitEvent("auSimpleSftpUpload", "jobCompleted");
                 if(self.sftpClient){
                     // commented out: try to maintain a long connection for sequential uploading
-//                    self.sftpClient.close();
-//                    self.sftpClient = null;
+                    self.sftpClient.close();
+                    self.sftpClient = null;
                 }
                 if(self.ftpClient){
-//                    self.ftpClient.raw.quit(function(err){
-//                        console.log(err);
-//                    });
-//                    self.ftpClient = null;
+                    self.ftpClient.raw.quit(function(err){
+                        console.log(err);
+                    });
+                    self.ftpClient = null;
                 }
             }
         };
@@ -245,6 +245,27 @@
             }
             return fullRemotePath;
         }
+        
+			self.getLs = function(filepath,config,tg,folder){
+				if(config.method == "ftp"){
+					self.isRunning = false;
+					if(self.ftpClient){
+						self.ftpClient.raw.quit(function(err){
+							console.log(err);
+						});
+						self.ftpClient = null;
+					}
+					self.ftpClient = new JSFtp({
+						port: config.port,
+						host: config.host,
+						user: config.username,
+						pass: config.password
+					});
+					self.ftpClient.ls(filepath,function(err, res){
+						_domainManager.emitEvent("auSimpleSftpUpload", "getLs", [res,tg,folder]);
+					});
+				}
+			}
     }
     
     var sftpJobs = new SftpJobs();
@@ -265,13 +286,23 @@
         if(config === undefined) {config=null;}
         sftpJobs.addDirectory(localPath, remotePath, config);
     }
-
+        
+	
+		function cmdGetLs(filepath, config, tg, folder) {
+			sftpJobs.getLs(filepath, config, tg, folder);
+		}
+	
+        
     function init(domainManager) {
         _domainManager = domainManager;
         
         if (!domainManager.hasDomain("auSimpleSftpUpload")) {
             domainManager.registerDomain("auSimpleSftpUpload", {major: 0, minor: 1});
         }
+        
+		 
+		domainManager.registerCommand("auSimpleSftpUpload", "getLs", cmdGetLs, true, "");
+		 
         
         domainManager.registerCommand(
             "auSimpleSftpUpload",       // domain name
@@ -358,6 +389,16 @@
                 name: "errorString",
                 type: "string",
                 description: "the description of the error"
+            }]
+        );
+		 
+		 domainManager.registerEvent(
+            "auSimpleSftpUpload",
+            "getLs",
+            [{
+                name: "list",
+                type: "object",
+                description: ""
             }]
         );
     }

@@ -1,0 +1,26 @@
+<div id="au-ssftp-server_manager_dialog" class="modal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h1 class="dialog-title"><small>{{MyStrings.EXTENSION_NAME}} - </small>{{MyStrings.TXT_REMOTE_SITE_VIEW}}</h1>
+	</div>
+	<div class="modal-body">
+		<ul class="nav nav-tabs nav-justified">
+			<li role="presentation" class="active"><a href="#tab1">{{MyStrings.TXT_TESTING_ENVIRONMENT}}</a></li>
+			<li role="presentation"><a href="#tab2">{{MyStrings.TXT_PRODUCTION_ENVIRONMENT}}</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="tab1" class="tab-pane active" data-location="test">
+				<p><button class="btn btn-conection">{{MyStrings.TXT_CONNECTION_UPDATE}}</button></p>
+				<div class="jstree jstree-brackets">
+					<p>{{MyStrings.TXT_SERVER_NO_SFTP}}</p>
+				</div>
+			</div>
+			<div id="tab2" class="tab-pane" data-location="production">
+				<p><button class="btn btn-conection">{{MyStrings.TXT_CONNECTION_UPDATE}}</button></p>
+				<div class="jstree jstree-brackets">
+					<p>{{MyStrings.TXT_SERVER_NO_SFTP}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

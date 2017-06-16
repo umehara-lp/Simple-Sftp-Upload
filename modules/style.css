@@ -41,3 +41,10 @@
 #au-ssftp-ftp_log_panel ul .start .o { color: #00A3D9; }
 #au-ssftp-ftp_log_panel ul .complete .o { color: #6DD900; }
 
+/* server_manager_dialog --------------------------------------- */
+#au-ssftp-server_manager_dialog { min-height: 50px; overflow: inherit !important; }
+#au-ssftp-server_manager_dialog .modal-body { width: 100%; max-height: calc(100% - 50px); overflow: auto; box-sizing: border-box; }
+#au-ssftp-server_manager_dialog ins.jstree-icon { left: -6px !important; }
+#au-ssftp-server_manager_dialog .date { float: right; width: 200px; text-align: right; opacity: 0.8; }
+#au-ssftp-server_manager_dialog .size { float: right; width: 200px; text-align: right; opacity: 0.8; }
+#au-ssftp-server_manager_dialog .tab-pane { padding-top: 20px; }
