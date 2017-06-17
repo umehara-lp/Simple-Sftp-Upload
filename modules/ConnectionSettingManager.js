@@ -39,6 +39,7 @@ define(function(require) {
 		$dialog_connection.find('.input-username').val(settings.username);
 		$dialog_connection.find('.input-rsa-path').val(settings.rsaPath);
 		$dialog_connection.find('.input-password').val(settings.password);
+		$dialog_connection.find('.input-local-path').val(settings.localPath);
 		$dialog_connection.find('.input-server-path').val(settings.serverPath);
 		if(settings.save){
 			$dialog_connection.find('.input-save').prop('checked', true);
@@ -50,6 +51,7 @@ define(function(require) {
 		$dialog_connection.find('.input-username-p').val(settings.username_p);
 		$dialog_connection.find('.input-rsa-path-p').val(settings.rsaPath_p);
 		$dialog_connection.find('.input-password-p').val(settings.password_p);
+		$dialog_connection.find('.input-local-path').val(settings.localPath_p);
 		$dialog_connection.find('.input-server-path-p').val(settings.serverPath_p);
 		
 	}
@@ -67,6 +69,7 @@ define(function(require) {
 			username:			$dialog_connection.find('.input-username').val(),
 			rsaPath:				pathExchange($dialog_connection.find('.input-rsa-path').val(), "false", "false"),
 			password:			$dialog_connection.find('.input-password').val(),
+			localPath:			pathExchange($dialog_connection.find('.input-local-path').val(), "through", "true"),
 			serverPath:			pathExchange($dialog_connection.find('.input-server-path').val(), "through", "true"),
 			save:					$dialog_connection.find('.input-save').is(':checked'),
 			
@@ -76,6 +79,7 @@ define(function(require) {
 			username_p:			$dialog_connection.find('.input-username-p').val(),
 			rsaPath_p:			pathExchange($dialog_connection.find('.input-rsa-path-p').val(), "false", "false"),
 			password_p:			$dialog_connection.find('.input-password-p').val(),
+			localPath_p:			pathExchange($dialog_connection.find('.input-local-path-p').val(), "through", "true"),
 			serverPath_p:		pathExchange($dialog_connection.find('.input-server-path-p').val(), "through", "true")
 		};
 		
