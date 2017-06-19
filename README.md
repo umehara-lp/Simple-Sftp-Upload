@@ -6,13 +6,12 @@ brackets-simple-sftp-upload
 Simple FTP / SFTP client. It is possible to set the test environment / production environment, upload in units of file / folder, can upload files modified on Brackets automatically, can write and read the connection setting file.
 
 
-## Getting Started ##
+## Getting Started　使い方 ##
 
 1. 接続設定ファイルの保存場所を決めてください。
+	Determine the storage location of the connection setting file.
 2. 上部メニューにある簡単SFTPからFTP/SFTP接続設定を開き接続設定を記述してください。
+	Open the FTP / SFTP connection setting from Easy SFTP in the upper menu and write the connection setting.
 3. アップロードしたいファイルやフォルダを右クリックし、テストサイト/本番サイトにアップロードします。
+	Right-click the file or folder you want to upload and upload to the test site / production site.
 
-
-1. Determine the storage location of the connection setting file.
-2. Open the FTP / SFTP connection setting from Easy SFTP in the upper menu and write the connection setting.
-3. Right-click the file or folder you want to upload and upload to the test site / production site.
