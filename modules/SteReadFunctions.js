@@ -4,11 +4,11 @@ define(function(require, exports, module) {
 		FileUtils = brackets.getModule("file/FileUtils");
 
 
-	function isSte(load_file, $dialog_connection){
-		console.log(load_file);
+	function isSte(load_file, $dialog_connection, callback){
+		//console.log(load_file);
 		if(FileUtils.getFileExtension(load_file) === "ste"){
 			ste_reader(load_file, function(ste){
-				setSteValues(ste, $dialog_connection);
+				setSteValues(ste, $dialog_connection, callback);
 			});
 			return true;
 		}else{
@@ -17,46 +17,52 @@ define(function(require, exports, module) {
 	}
 
 
-	function setSteValues(ste, $dialog_connection) {
-		$dialog_connection.find('.input-connecting-name').val(ste.siteName);
+	function setSteValues(ste, $dialog_connection, callback) {
+		var moldedSte = {};
+		moldedSte.connectingName = ste.siteName;
 
-		if(ste.testingServer.useSFTP === "TRUE"){
-			$dialog_connection.find('.input-method').val("sftp");
-			$dialog_connection.find('.input-port').val(22);
-			$dialog_connection.find('.input-password').val(ste.testingServer.passphrase);
-		} else {
-			$dialog_connection.find('.input-method').val("ftp");
-			$dialog_connection.find('.input-port').val(21);
-			$dialog_connection.find('.input-password').val(ste.testingServer.pw);
-		}
-		if(ste.testingServer.port){
-			$dialog_connection.find('.input-port').val(ste.testingServer.port);
-		}
-		$dialog_connection.find('.input-host').val(ste.testingServer.host);
-		$dialog_connection.find('.input-username').val(ste.testingServer.user);
-		$dialog_connection.find('.input-rsa-path').val(ste.testingServer.identityfileabsolutepath);
-		$dialog_connection.find('.input-server-path').val(ste.testingServer.remoteroot);
-		if(ste.save){
-			$dialog_connection.find('.input-save').prop('checked', true);
+		if(ste.testingServer){
+			if(ste.testingServer.useSFTP === "TRUE"){
+				moldedSte.method = "sftp";
+				moldedSte.port = 22;
+				moldedSte.password = ste.testingServer.passphrase;
+			} else {
+				moldedSte.method = "ftp";
+				moldedSte.port = 21;
+				moldedSte.password = ste.testingServer.pw;
+			}
+			if(ste.testingServer.port){
+				moldedSte.port = ste.testingServer.port;
+			}
+			moldedSte.host = ste.testingServer.host;
+			moldedSte.username = ste.testingServer.user;
+			moldedSte.rsaPath = ste.testingServer.identityfileabsolutepath;
+			moldedSte.serverPath = ste.testingServer.remoteroot;
+			if(ste.save){
+				moldedSte.save = true;
+			}
 		}
 
-		if(ste.remoteServer.useSFTP === "TRUE"){
-			$dialog_connection.find('.input-method-p').val("sftp");
-			$dialog_connection.find('.input-port-p').val(22);
-			$dialog_connection.find('.input-password-p').val(ste.remoteServer.passphrase);
-		} else {
-			$dialog_connection.find('.input-method-p').val("ftp");
-			$dialog_connection.find('.input-port-p').val(21);
-			$dialog_connection.find('.input-password-p').val(ste.remoteServer.pw);
+		if(ste.remoteServer){
+			if(ste.remoteServer.useSFTP === "TRUE"){
+				moldedSte.method_p = "sftp";
+				moldedSte.port_p = 22;
+				moldedSte.password_p = ste.remoteServer.passphrase;
+			} else {
+				moldedSte.method_p = "ftp";
+				moldedSte.port_p = 21;
+				moldedSte.password_p = ste.remoteServer.pw;
+			}
+			if(ste.remoteServer.port){
+				moldedSte.port_p = ste.remoteServer.port;
+			}
+			moldedSte.host_p = ste.remoteServer.host;
+			moldedSte.username_p = ste.remoteServer.user;
+			moldedSte.rsaPath_p = ste.remoteServer.identityfileabsolutepath;
+			moldedSte.serverPath_p = ste.remoteServer.remoteroot;
 		}
-		if(ste.remoteServer.port){
-			$dialog_connection.find('.input-port-p').val(ste.remoteServer.port);
-		}
-		$dialog_connection.find('.input-host-p').val(ste.remoteServer.host);
-		$dialog_connection.find('.input-username-p').val(ste.remoteServer.user);
-		$dialog_connection.find('.input-rsa-path-p').val(ste.remoteServer.identityfileabsolutepath);
-		$dialog_connection.find('.input-server-path-p').val(ste.remoteServer.remoteroot);
 
+		callback(moldedSte);
 	}
 
 
@@ -80,6 +86,7 @@ define(function(require, exports, module) {
 
 
 	function ste_reader(path, callback) {
+		
 		var rtn;
 		var fileEntry, fileContent;
 
@@ -91,6 +98,7 @@ define(function(require, exports, module) {
 
 		fileEntry.exists(function(err, exists) {
 			if (exists) {
+				
 				fileContent = FileUtils.readAsText(fileEntry);
 				fileContent.done(function(content) {
 					try {
@@ -100,8 +108,6 @@ define(function(require, exports, module) {
 				});
 			}
 		});
-
-		return rtn;
 	}
 
 
@@ -111,6 +117,7 @@ define(function(require, exports, module) {
 		var rtn = {};
 		rtn.siteName = siteName;
 		var servers = document.querySelectorAll("#xml_reader server");
+		//console.log(servers.length);
 		var attrArray = ["name", "accesstype", "host", "remoteroot", "user", "pw", "passphrase", "usepasv", "useSFTP", "identityfileabsolutepath"];
 		[].forEach.call(servers, function(server, i, arr) {
 			var serverType = false;

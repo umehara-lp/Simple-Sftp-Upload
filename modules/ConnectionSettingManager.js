@@ -123,7 +123,7 @@ define(function(require) {
 	/* loadConnectionSetting ------------------------------------------------------------ */
 	function loadConnectionSetting(load_file,callback) {
 		
-		if(load_file && SteReadFunctions.isSte(load_file, $dialog_connection)){
+		if(load_file && SteReadFunctions.isSte(load_file, $dialog_connection, setInputValues)){
 			return;
 		}
 		
