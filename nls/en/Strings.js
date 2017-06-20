@@ -27,6 +27,7 @@ define({
 	TXT_CONNECTION_USER_NAME:	"User Name",
 	TXT_CONNECTION_PASSWORD:	"Password",
 	TXT_CONNECTION_RSA:	"RSA private key",
+	TXT_CONNECTION_LOCAL_PATH:	"Local Path",
 	TXT_CONNECTION_SERVER_PATH:	"Server Path",
 	TXT_CONNECTION_UPLOAD_ON_SAVE:	"Upload on Save",
 	TXT_CONNECTION_SETTING_LOAD:	"Reading the configuration file",

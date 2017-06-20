@@ -113,6 +113,7 @@ define(function(require) {
 					username: connectionSetting.username,
 					rsaPath: connectionSetting.rsaPath,
 					password: connectionSetting.password,
+					localPath: connectionSetting.localPath,
 					serverPath: connectionSetting.serverPath
 				};
 			}else if(accessPoint == "production"){
@@ -124,9 +125,12 @@ define(function(require) {
 					username: connectionSetting.username_p,
 					rsaPath: connectionSetting.rsaPath_p,
 					password: connectionSetting.password_p,
+					localPath: connectionSetting.localPath_p,
 					serverPath: connectionSetting.serverPath_p
 				};
 			}
+			
+			remotePath = remotePath.replace(serverConnectionSetting.localPath, '');
 			
 			var auto = "";
 			if(uploadOnSave && !connectionSetting.save) return false;
