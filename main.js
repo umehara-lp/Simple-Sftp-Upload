@@ -20,6 +20,7 @@ define(function(require, exports, module) {
 		 packageName					= JSON.parse(packageJSON).name,
 		 menu								= Menus.getMenu(packageName),
 		 contextMenu					= Menus.getContextMenu(Menus.ContextMenuIds.PROJECT_MENU),
+		 editorContextMenu			= Menus.getContextMenu(Menus.ContextMenuIds.EDITOR_MENU),
 		
 		_domainPath						= ExtensionUtils.getModulePath(module, "node/SftpUploadDomain"),
 		_nodeDomain						= new NodeDomain("auSimpleSftpUpload", _domainPath);
@@ -56,7 +57,12 @@ define(function(require, exports, module) {
 		contextMenu.addMenuDivider();
 		contextMenu.addMenuItem(menuId5, "");
 		
-		
+		// add editorContextMenu Menu
+		editorContextMenu.addMenuItem(menuId4, "", Menus.FIRST);
+		editorContextMenu.addMenuDivider(Menus.BEFORE, menuId4);
+		editorContextMenu.addMenuItem(menuId5, "", Menus.AFTER, menuId4);
+		editorContextMenu.addMenuDivider(Menus.BEFORE, menuId5);
+		editorContextMenu.addMenuDivider(Menus.AFTER, menuId5);
 	}
 	
 	

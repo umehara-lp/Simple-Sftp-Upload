@@ -7,6 +7,7 @@ define(function(require, exports, module) {
 		 Mustache						= brackets.getModule("thirdparty/mustache/mustache"),
 		
 		 CS_MANAGER						= require("modules/ConnectionSettingManager"),
+		 SFTP_MANAGER					= require("modules/SftpManager"),
 		 STRINGS							= require("modules/Strings"),
 		 DRAG_AND_MOVE					= require("modules/DragAndMove"),
 		
@@ -87,13 +88,13 @@ define(function(require, exports, module) {
 				if(res[i]["type"] == 1){
 					list += '<li class="jstree-closed jstree-folder" style="padding-left:10px" id="fid_' + folderId + '" data-folder="'+ folder + res[i]["name"] + '/">';
 					list += '<ins class="jstree-icon"></ins>';
-					list += '<a href="#" class=""><div style="display:inline-block;"></div><ins class="jstree-icon"> </ins><span>' + res[i]["name"] + '</span><span class="date">' + getChTsDate(res[i]["time"]) + '</span></a>';
+					list += '<a href="#" class=""><div style="display:inline-block;"></div><ins class="jstree-icon"> </ins><span>' + res[i]["name"] + '</span><span class="delete">delete</span><span class="date">' + getChTsDate(res[i]["time"]) + '</span><span class="size">&nbsp;</span></a>';
 					list += '</li>';
 				}else if(res[i]["type"] == 0){
 					var fname = res[i]["name"].split(/\.(?=[^.]+$)/);
-					list += '<li class="jstree-leaf">';
+					list += '<li class="jstree-leaf" data-folder="'+ folder + res[i]["name"] + '">';
 					list += '<ins class="jstree-icon"></ins>';
-					list += '<a href="#" class=""><div style="display:inline-block;"></div><ins class="jstree-icon"></ins><span>' + fname[0] + '</span><span class="extension">' + fname[1] + '</span><span class="date">' + getChTsDate(res[i]["time"]) + '</span><span class="size">' + getKByte(res[i]["size"]) + '</span></a>';
+					list += '<a href="#" class=""><div style="display:inline-block;"></div><ins class="jstree-icon"></ins><span>' + fname[0] + '</span><span class="extension">' + fname[1] + '</span><span class="delete">delete</span><span class="date">' + getChTsDate(res[i]["time"]) + '</span><span class="size">' + getKByte(res[i]["size"]) + '</span><span class="download">download</span></a>';
 					list += '</li>';
 				}
 				folderId++;
@@ -116,6 +117,14 @@ define(function(require, exports, module) {
 							$(this).parent().addClass("jstree-closed");
 							$(this).parent().find("ul").remove();
 						}
+					});
+				});
+				$tgs.find(".download").each(function(){
+					$(this).unbind("click");
+					$(this).click(function(){
+						SFTP_MANAGER.downloadFile($(this).parent().parent().attr("data-folder"),$(this).closest(".tab-pane").attr("data-location"));
+						$(this).addClass("comp");
+						return false;
 					});
 				});
 			}

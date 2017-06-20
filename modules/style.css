@@ -40,11 +40,17 @@
 #au-ssftp-ftp_log_panel ul .error .o { color: #FF2626; }
 #au-ssftp-ftp_log_panel ul .start .o { color: #00A3D9; }
 #au-ssftp-ftp_log_panel ul .complete .o { color: #6DD900; }
+#au-ssftp-ftp_log_panel ul .get .o { color: #BF00FF; }
 
 /* server_manager_dialog --------------------------------------- */
 #au-ssftp-server_manager_dialog { min-height: 50px; overflow: inherit !important; }
 #au-ssftp-server_manager_dialog .modal-body { width: 100%; max-height: calc(100% - 50px); overflow: auto; box-sizing: border-box; }
+#au-ssftp-server_manager_dialog .jstree-brackets li { border-bottom: solid 1px #333; }
 #au-ssftp-server_manager_dialog ins.jstree-icon { left: -6px !important; }
 #au-ssftp-server_manager_dialog .date { float: right; width: 200px; text-align: right; opacity: 0.8; }
 #au-ssftp-server_manager_dialog .size { float: right; width: 200px; text-align: right; opacity: 0.8; }
+#au-ssftp-server_manager_dialog .download { float: right; width: 80px; text-align: right; border: solid 1px rgba(255,255,255,0.3); text-align: center; }
+#au-ssftp-server_manager_dialog .download:hover { cursor: pointer; opacity: 0.5; }
+#au-ssftp-server_manager_dialog .download.comp { opacity: 0.2; }
+#au-ssftp-server_manager_dialog .delete { display: none; float: right; width: 50px; text-align: right; }
 #au-ssftp-server_manager_dialog .tab-pane { padding-top: 20px; }

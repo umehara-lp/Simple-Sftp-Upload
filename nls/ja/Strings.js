@@ -39,7 +39,8 @@ define({
 	TXT_UPLOADING_COMP_Q:	"アップロードキュー完了",
 	TXT_REMOTE_SITE_VIEW:	"リモートサイトの表示",
 	TXT_CONNECTION_UPDATE:	"接続／更新",
-	TXT_SERVER_NO_SFTP:	"※SFTP接続では表示できません。"
+	TXT_SERVER_NO_SFTP:	"※SFTP接続では表示できません。",
+	TXT_DOWNLOAD:	"ダウンロード"
 	
 	
 });

@@ -4,6 +4,7 @@ define(function(require) {
 	var Strings							= brackets.getModule("strings"),
 		 ProjectManager				= brackets.getModule("project/ProjectManager"),
 		 FileSystem						= brackets.getModule("filesystem/FileSystem"),
+		 Directory						= brackets.getModule("filesystem/Directory"),
 		
 		 P_MANAGER						= require("modules/PreferencesManager"),
 		 CS_MANAGER						= require("modules/ConnectionSettingManager"),
@@ -87,7 +88,7 @@ define(function(require) {
 		var serverConnectionSetting = {},
 			 item,
 			 item_full,
-			 projectUrl,
+			 projectUrl = ProjectManager.getProjectRoot().fullPath,
 			 remotePath;
 		
 		if(uploadOnSave){
@@ -96,9 +97,10 @@ define(function(require) {
 		}else{
 			item = ProjectManager.getSelectedItem();
 			item_full = item.fullPath;
-			projectUrl = ProjectManager.getProjectRoot().fullPath;
 			remotePath = item.fullPath.replace(projectUrl, '');
 		}
+		
+		if( item_full.indexOf(projectUrl) != 0 ) return false;
 		
 		CS_MANAGER.getConnectionSetting(function(connectionSetting){
 			
@@ -198,6 +200,10 @@ define(function(require) {
 			}
 		});
 		
+		_nodeDomain.on('getItem', function(err, msg){
+			FL_MANAGER.outputLog('<span class="log get"><span class="o">[' + STRINGS.TXT_DOWNLOAD + ']</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d">' + msg + '</span></span>');
+		});
+		
 	}
 	
 	
@@ -219,6 +225,59 @@ define(function(require) {
 	}
 	
 	
+	/* downloadFile ------------------------------------------------------------ */
+	function downloadFile(item,accessPoint) {
+		
+		var serverConnectionSetting;
+		
+		CS_MANAGER.getConnectionSetting(function(connectionSetting){
+			
+			if(accessPoint == "test"){
+				environment = STRINGS.TXT_TESTING_ENVIRONMENT;
+				serverConnectionSetting = {
+					method: connectionSetting.method,
+					host: connectionSetting.host,
+					port: connectionSetting.port,
+					username: connectionSetting.username,
+					rsaPath: connectionSetting.rsaPath,
+					password: connectionSetting.password,
+					serverPath: connectionSetting.serverPath
+				};
+			}else if(accessPoint == "production"){
+				environment = STRINGS.TXT_PRODUCTION_ENVIRONMENT;
+				serverConnectionSetting = {
+					method: connectionSetting.method_p,
+					host: connectionSetting.host_p,
+					port: connectionSetting.port_p,
+					username: connectionSetting.username_p,
+					rsaPath: connectionSetting.rsaPath_p,
+					password: connectionSetting.password_p,
+					serverPath: connectionSetting.serverPath_p
+				};
+			}
+			
+			var dir = item.split("/");
+			var dirpath = "";
+			for(var i = 0; i < dir.length -1; i++){
+				if(i>0) dirpath += "/";
+				dirpath += dir[i];
+				FileSystem.getDirectoryForPath(ProjectManager.getProjectRoot().fullPath + dirpath).create();
+			}
+			
+			_nodeDomain.exec('getItem', serverConnectionSetting.serverPath + item, ProjectManager.getProjectRoot().fullPath + item, serverConnectionSetting).done(function(){
+				
+				ProjectManager.refreshFileTree();
+				
+			}).fail(function(err){
+				
+			});
+			
+		});
+
+		
+	}
+	
+	
 	/* setUploadOnSave ------------------------------------------------------------ */
 	function setUploadOnSave(){
 		
@@ -231,18 +290,12 @@ define(function(require) {
 					created.forEach(function(entry, i, arr){
 						var path = entry._path,
 							 projectUrl = ProjectManager.getProjectRoot().fullPath;
-						
-						if( path.indexOf(projectUrl) === 0 ){
-							serverUpload("test", true, path, path.replace(projectUrl, ''));
-						}
+						serverUpload("test", true, path, path.replace(projectUrl, ''));
 					});
 				} else {
 					var path = entry._path,
 						 projectUrl = ProjectManager.getProjectRoot().fullPath;
-					
-					if( path.indexOf(projectUrl) === 0 ){
-						serverUpload("test", true, path, path.replace(projectUrl, ''));
-					}
+					serverUpload("test", true, path, path.replace(projectUrl, ''));
 				}
 			}
 		});
@@ -266,7 +319,8 @@ define(function(require) {
 	return {
 		init: init,
 		uploadTestSite: uploadTestSite,
-		uploadProductionSite: uploadProductionSite
+		uploadProductionSite: uploadProductionSite,
+		downloadFile: downloadFile
 	};
 	
 });

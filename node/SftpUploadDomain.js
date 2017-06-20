@@ -246,12 +246,35 @@
             return fullRemotePath;
         }
         
+			self.getItem = function(remotePath, localPath, config){
+				console.log(remotePath + " | " + localPath);
+				if(config.method == "ftp"){
+					self.isRunning = false;
+					if(self.ftpClient){
+						self.ftpClient.raw.quit(function(err){
+							//console.log(err);
+						});
+						self.ftpClient = null;
+					}
+					self.ftpClient = new JSFtp({
+						port: config.port,
+						host: config.host,
+						user: config.username,
+						pass: config.password
+					});
+					self.ftpClient.get(remotePath, localPath, function(hadErr){
+						_domainManager.emitEvent("auSimpleSftpUpload", "getItem", [remotePath]);
+					});
+				}
+			}
+			
+			
 			self.getLs = function(filepath,config,tg,folder){
 				if(config.method == "ftp"){
 					self.isRunning = false;
 					if(self.ftpClient){
 						self.ftpClient.raw.quit(function(err){
-							console.log(err);
+							//console.log(err);
 						});
 						self.ftpClient = null;
 					}
@@ -288,6 +311,10 @@
     }
         
 	
+		function cmdGetItem(remotePath, localPath, config) {
+			sftpJobs.getItem(remotePath, localPath, config);
+		}
+	
 		function cmdGetLs(filepath, config, tg, folder) {
 			sftpJobs.getLs(filepath, config, tg, folder);
 		}
@@ -300,6 +327,8 @@
             domainManager.registerDomain("auSimpleSftpUpload", {major: 0, minor: 1});
         }
         
+		 
+		domainManager.registerCommand("auSimpleSftpUpload", "getItem", cmdGetItem, false, "");
 		 
 		domainManager.registerCommand("auSimpleSftpUpload", "getLs", cmdGetLs, true, "");
 		 
@@ -389,6 +418,16 @@
                 name: "errorString",
                 type: "string",
                 description: "the description of the error"
+            }]
+        );
+		 
+		 domainManager.registerEvent(
+            "auSimpleSftpUpload",
+            "getItem",
+            [{
+                name: "list",
+                type: "string",
+                description: ""
             }]
         );
 		 

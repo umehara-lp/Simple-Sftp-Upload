@@ -39,7 +39,8 @@ define({
 	TXT_UPLOADING_COMP_Q:	"Upload queue complete",
 	TXT_REMOTE_SITE_VIEW:	"View remote site",
 	TXT_CONNECTION_UPDATE:	"Connection / Update",
-	TXT_SERVER_NO_SFTP:	"* It can not be displayed with SFTP connection."
+	TXT_SERVER_NO_SFTP:	"* It can not be displayed with SFTP connection.",
+	TXT_DOWNLOAD:	"Download"
 	
 	
 	
