@@ -9,6 +9,8 @@ define(function(require) {
 		 P_MANAGER						= require("modules/PreferencesManager"),
 		 CS_MANAGER						= require("modules/ConnectionSettingManager"),
 		 FL_MANAGER						= require("modules/FtpLogManager"),
+		 MF_MANAGER						= require("modules/ModifyLogManager"),
+		 LS_MANAGER						= require("modules/LocalSaveManager"),
 		 STRINGS							= require("modules/Strings"),
 		
 		 context							= {Strings: Strings, MyStrings: STRINGS},
@@ -78,8 +80,6 @@ define(function(require) {
 			return false;
 		}*/
 		
-		FL_MANAGER.panelOpen();
-		
 		if(!P_MANAGER.get("_storageLocation")) {
 			FL_MANAGER.outputLog('<span class="log warning"><span class="o">[WARNING]</span><span class="e"></span><span class="t">' + getNdate() + '</span><span class="d">' + STRINGS.TXT_SETTING_ERROR + '</span></span>');
 			return false;
@@ -91,16 +91,25 @@ define(function(require) {
 			 projectUrl = ProjectManager.getProjectRoot().fullPath,
 			 remotePath;
 		
-		if(uploadOnSave){
-			item_full = _item;
-			remotePath = _remotePath;
-		}else{
+		if(!uploadOnSave && !_item && !_remotePath){
 			item = ProjectManager.getSelectedItem();
 			item_full = item.fullPath;
 			remotePath = item.fullPath.replace(projectUrl, '');
 		}
+		if(_item && _remotePath){
+			item = {};
+			if( _remotePath.slice(-1) == '/' ){
+				item.isFile = false;
+			}else{
+				item.isFile = true;
+			}
+			item_full = _item;
+			remotePath = _remotePath;
+		}
 		
 		if( item_full.indexOf(projectUrl) != 0 ) return false;
+		
+		FL_MANAGER.panelOpen();
 		
 		CS_MANAGER.getConnectionSetting(function(connectionSetting){
 			
@@ -139,12 +148,25 @@ define(function(require) {
 				FL_MANAGER.outputLog('<span class="log start"><span class="o">[' + STRINGS.TXT_START_UPLOADING_Q + auto + ']</span><span class="e">' + environment + '</span><span class="t">' + getNdate() + '</span><span class="d">' + item_full + "&nbsp;--->&nbsp;" + serverConnectionSetting.host + "/" +  serverConnectionSetting.serverPath + remotePath + '</span></span>');
 				
 				if(uploadOnSave){
-					uploadItem(item_full, remotePath, serverConnectionSetting);
+					if(serverConnectionSetting.method == "local"){
+						LS_MANAGER.saveLocal(remotePath, serverConnectionSetting.host);
+					}else{
+						uploadItem(item_full, remotePath, serverConnectionSetting);
+					}
 				}else{
 					if(item.isFile){
-						uploadItem(item_full, remotePath, serverConnectionSetting);
+						if(serverConnectionSetting.method == "local"){
+							LS_MANAGER.saveLocal(remotePath, serverConnectionSetting.host);
+						}else{
+							uploadItem(item_full, remotePath, serverConnectionSetting);
+						}
 					}else{
-						uploadDirectory(item_full, remotePath, serverConnectionSetting);
+						if(serverConnectionSetting.method == "local"){
+							LS_MANAGER.saveLocal(remotePath, serverConnectionSetting.host);
+						}else{
+							uploadDirectory(item_full, remotePath, serverConnectionSetting);
+						}
+						
 					}
 				}
 				
@@ -158,18 +180,17 @@ define(function(require) {
 	}
 	
 	/* uploadTestSite ------------------------------------------------------------ */
-	function uploadTestSite(){
+	function uploadTestSite(_item, _remotePath){
 		
-		serverUpload("test", false);
+		serverUpload("test", false, _item, _remotePath);
 		
 	}
 	
 	
 	/* uploadProductionSite ------------------------------------------------------------ */
-	function uploadProductionSite(){
+	function uploadProductionSite(_item, _remotePath){
 		
-		serverUpload("production", false);
-		
+		serverUpload("production", false, _item, _remotePath);
 	}
 	
 	
@@ -273,7 +294,7 @@ define(function(require) {
 			});
 			
 		});
-
+		
 		
 	}
 	
@@ -282,6 +303,7 @@ define(function(require) {
 	function setUploadOnSave(){
 		
 		FileSystem.on( 'change', function( event, entry, created, deleted ) {
+			
 			if(deleted && deleted.length > 0){
 				return;
 			}
@@ -291,12 +313,15 @@ define(function(require) {
 						var path = entry._path,
 							 projectUrl = ProjectManager.getProjectRoot().fullPath;
 						serverUpload("test", true, path, path.replace(projectUrl, ''));
+						if( path.indexOf(projectUrl) != 0 ){}else{ MF_MANAGER.saveModifyLog(path.replace(projectUrl, '')); }
 					});
 				} else {
 					var path = entry._path,
 						 projectUrl = ProjectManager.getProjectRoot().fullPath;
 					serverUpload("test", true, path, path.replace(projectUrl, ''));
+					if( path.indexOf(projectUrl) != 0 ){}else{ MF_MANAGER.saveModifyLog(path.replace(projectUrl, ''));}
 				}
+				if( path.indexOf(projectUrl) != 0 ){}else{ window.setTimeout( function(){ MF_MANAGER.saveLog(); }, 1000 ); }
 			}
 		});
 		
@@ -320,7 +345,8 @@ define(function(require) {
 		init: init,
 		uploadTestSite: uploadTestSite,
 		uploadProductionSite: uploadProductionSite,
-		downloadFile: downloadFile
+		downloadFile: downloadFile,
+		getUniqueId: getUniqueId
 	};
 	
 });

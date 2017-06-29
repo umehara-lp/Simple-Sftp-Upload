@@ -247,7 +247,6 @@
         }
         
 			self.getItem = function(remotePath, localPath, config){
-				console.log(remotePath + " | " + localPath);
 				if(config.method == "ftp"){
 					self.isRunning = false;
 					if(self.ftpClient){

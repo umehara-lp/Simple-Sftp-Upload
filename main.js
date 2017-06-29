@@ -14,6 +14,8 @@ define(function(require, exports, module) {
 		 FL_MANAGER						= require("modules/FtpLogManager"),
 		 SFTP_MANAGER					= require("modules/SftpManager"),
 		 SFTP_SV_MANAGER				= require("modules/SftpServerManager"),
+		 MF_MANAGER						= require("modules/ModifyLogManager"),
+		 LS_MANAGER						= require("modules/LocalSaveManager"),
 		 STRINGS							= require("modules/Strings"),
 		
 		 packageJSON					= require("text!package.json"),
@@ -23,7 +25,10 @@ define(function(require, exports, module) {
 		 editorContextMenu			= Menus.getContextMenu(Menus.ContextMenuIds.EDITOR_MENU),
 		
 		_domainPath						= ExtensionUtils.getModulePath(module, "node/SftpUploadDomain"),
-		_nodeDomain						= new NodeDomain("auSimpleSftpUpload", _domainPath);
+		_nodeDomain						= new NodeDomain("auSimpleSftpUpload", _domainPath),
+	
+		_domainPath2					= ExtensionUtils.getModulePath(module, "node/LocalSaveDomein"),
+		_nodeDomain2					= new NodeDomain("auLocalSaveDomein", _domainPath2);
 	
 	
 	/* addMenu ------------------------------------------------------------ */
@@ -34,7 +39,9 @@ define(function(require, exports, module) {
 			 menuId3 = packageName + ".menu3",
 			 menuId4 = packageName + ".menu4",
 			 menuId5 = packageName + ".menu5",
-			 menuId6 = packageName + ".menu6";
+			 menuId6 = packageName + ".menu6",
+			 menuId7 = packageName + ".menu7",
+			 menuId8 = packageName + ".menu8";
 		
 		if(!menu) {
 			menu = Menus.addMenu(STRINGS.EXTENSION_NAME, packageName, Menus.BEFORE, Menus.AppMenuBar.HELP_MENU);
@@ -48,10 +55,15 @@ define(function(require, exports, module) {
 		SFTP_SV_MANAGER.addMenu(menu, menuId6);
 		menu.addMenuDivider();
 		FL_MANAGER.addMenu(menu, menuId3);
+		menu.addMenuDivider();
+		MF_MANAGER.addMenu(menu, menuId8);
 		
 		// add Context Menu
 		CommandManager.register(STRINGS.TXT_TEST_UPLOAD, menuId4, SFTP_MANAGER.uploadTestSite);
 		CommandManager.register(STRINGS.TXT_PRODUCTION_UPLOAD, menuId5, SFTP_MANAGER.uploadProductionSite);
+		CommandManager.register(STRINGS.TXT_ADD_MODIFY_LOG, menuId7, MF_MANAGER.setLog);
+		contextMenu.addMenuDivider();
+		contextMenu.addMenuItem(menuId7, "");
 		contextMenu.addMenuDivider();
 		contextMenu.addMenuItem(menuId4, "");
 		contextMenu.addMenuDivider();
@@ -75,6 +87,7 @@ define(function(require, exports, module) {
 		
 		SFTP_MANAGER.init(_nodeDomain);
 		SFTP_SV_MANAGER.init(_nodeDomain);
+		LS_MANAGER.init(_nodeDomain2);
 		
 		if(!P_MANAGER.get("_storageLocation")) {
 			CF_MANAGER.openDialog();

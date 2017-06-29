@@ -155,8 +155,25 @@ define(function(require) {
 	}
 	
 	
+	/* loadConnectionSetting ------------------------------------------------------------ */
 	function getConnectionSetting(callback) {
 		loadConnectionSetting(false,callback);
+	}
+	
+	
+	/* setSelectionVal ------------------------------------------------------------ */
+	function setSelectionVal() {
+		var $tgs = $dialog_connection.find(".selectVal");
+		$tgs.each(function(){
+			var $tg = $(this), $select = $tg.find("select");
+			$select.off("change");
+			$select.on("change",function(){
+				var tgCls = $select.find("option:selected").val();
+				$tg.find("tr").hide();
+				$tg.find("." + tgCls).show();
+			});
+			$tgs.find("select").trigger("change");
+		});
 	}
 	
 	
@@ -172,6 +189,8 @@ define(function(require) {
 			
 			loadConnectionSetting();
 			
+			setSelectionVal();
+			
 			$dialog_connection.on( 'click', '.dialog-button-save', function() {
 				saveConnectionSetting();
 			} );
@@ -179,6 +198,7 @@ define(function(require) {
 			$dialog_connection.find(".nav-tabs a").click(function (e) {
 				e.preventDefault();
 				$(this).tab('show');
+				setSelectionVal();
 			});
 			
 			$dialog_connection.on( 'click', '.dialog-button-reference', function() {

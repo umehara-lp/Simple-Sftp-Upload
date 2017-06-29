@@ -148,12 +148,12 @@ define(function(require, exports, module) {
 		
 		$dialog_server_manager.find("#tab1 .btn-conection").click(function (e) {
 			$("#au-ssftp-server_manager_dialog #tab1 .jstree").find("ul").remove();
-			getList("test", "", "#au-ssftp-server_manager_dialog #tab1 .jstree");
+			getList("test", "", "#au-ssftp-server_manager_dialog #tab1 .jstree-brackets-wrap");
 		});
 		
 		$dialog_server_manager.find("#tab2 .btn-conection").click(function (e) {
 			$("#au-ssftp-server_manager_dialog #tab2 .jstree").find("ul").remove();
-			getList("production", "", "#au-ssftp-server_manager_dialog #tab2 .jstree");
+			getList("production", "", "#au-ssftp-server_manager_dialog #tab2 .jstree-brackets-wrap");
 		});
 		
 		

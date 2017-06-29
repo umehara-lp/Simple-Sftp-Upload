@@ -3,7 +3,7 @@ define(function(require) {
 	
 	var Strings							= brackets.getModule("strings"),
 		 CommandManager				= brackets.getModule("command/CommandManager"),
-		 WorkspaceManager					= brackets.getModule("view/WorkspaceManager"),
+		 WorkspaceManager				= brackets.getModule("view/WorkspaceManager"),
 		 Mustache						= brackets.getModule("thirdparty/mustache/mustache"),
 		
 		 STRINGS							= require("modules/Strings"),

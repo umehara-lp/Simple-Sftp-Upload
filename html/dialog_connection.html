@@ -14,54 +14,56 @@
 		</ul>
 		<div class="tab-content">
 			<div id="tab1" class="tab-pane active">
-				<table>
-					<tr><th>{{MyStrings.TXT_CONNECTION_TYPE}}</th><td>
+				<table class="selectVal">
+					<tr class="ftp sftp local"><th>{{MyStrings.TXT_CONNECTION_TYPE}}</th><td>
 						<select class="input-method">
 							<option value="ftp" selected>{{ MyStrings.TXT_SETTINGS_DIALOG_TYPE_FTP }}</option>
 							<option value="sftp">{{ MyStrings.TXT_SETTINGS_DIALOG_TYPE_SFTP }}</option>
+							<option value="local">{{ MyStrings.TXT_SETTINGS_DIALOG_TYPE_LOCAL }}</option>
 						</select>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_HOST}}</th><td>
+					<tr class="ftp sftp local"><th>{{MyStrings.TXT_CONNECTION_HOST}}</th><td>
 						<input type="text" class="input-host"/> {{MyStrings.TXT_CONNECTION_PORT}} <input type="text" class="input-port" value="21"/>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_USER_NAME}}</th><td>
+					<tr class="ftp sftp"><th>{{MyStrings.TXT_CONNECTION_USER_NAME}}</th><td>
 						<input type="text" class="input-username"/>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_RSA}}</th><td>
+					<tr class="sftp"><th>{{MyStrings.TXT_CONNECTION_RSA}}</th><td>
 						<input type="text" class="input-rsa-path" placeholder="(optional OPEN SSH)"/> <span class="btn dialog-button-rsa-reference">{{MyStrings.TXT_REFERENCE}}</span>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_PASSWORD}}</th><td>
+					<tr class="ftp sftp"><th>{{MyStrings.TXT_CONNECTION_PASSWORD}}</th><td>
 						<input type="password" class="input-password"/>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_SERVER_PATH}}</th><td>
+					<tr class="ftp sftp"><th>{{MyStrings.TXT_CONNECTION_SERVER_PATH}}</th><td>
 						<input type="text" class="input-server-path"/>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_UPLOAD_ON_SAVE}}</th><td>
+					<tr class="ftp sftp local"><th>{{MyStrings.TXT_CONNECTION_UPLOAD_ON_SAVE}}</th><td>
 						<input type="checkbox" class="input-save" />
 					</td></tr>
 				</table>
 			</div>
 			<div id="tab2" class="tab-pane">
-				<table>
-					<tr><th>{{MyStrings.TXT_CONNECTION_TYPE}}</th><td>
+				<table class="selectVal">
+					<tr class="ftp sftp local"><th>{{MyStrings.TXT_CONNECTION_TYPE}}</th><td>
 						<select class="input-method-p">
 							<option value="ftp" selected>{{ MyStrings.TXT_SETTINGS_DIALOG_TYPE_FTP }}</option>
 							<option value="sftp">{{ MyStrings.TXT_SETTINGS_DIALOG_TYPE_SFTP }}</option>
+							<option value="local">{{ MyStrings.TXT_SETTINGS_DIALOG_TYPE_LOCAL }}</option>
 						</select>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_HOST}}</th><td>
+					<tr class="ftp sftp local"><th>{{MyStrings.TXT_CONNECTION_HOST}}</th><td>
 						<input type="text" class="input-host-p"/> {{MyStrings.TXT_CONNECTION_PORT}} <input type="text" class="input-port-p" value="21"/>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_USER_NAME}}</th><td>
+					<tr class="ftp sftp"><th>{{MyStrings.TXT_CONNECTION_USER_NAME}}</th><td>
 						<input type="text" class="input-username-p"/>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_RSA}}</th><td>
+					<tr class="sftp"><th>{{MyStrings.TXT_CONNECTION_RSA}}</th><td>
 						<input type="text" class="input-rsa-path-p" placeholder="(optional OPEN SSH)"/> <span class="btn dialog-button-rsa-reference-p">{{MyStrings.TXT_REFERENCE}}</span>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_PASSWORD}}</th><td>
+					<tr class="ftp sftp"><th>{{MyStrings.TXT_CONNECTION_PASSWORD}}</th><td>
 						<input type="password" class="input-password-p"/>
 					</td></tr>
-					<tr><th>{{MyStrings.TXT_CONNECTION_SERVER_PATH}}</th><td>
+					<tr class="ftp sftp"><th>{{MyStrings.TXT_CONNECTION_SERVER_PATH}}</th><td>
 						<input type="text" class="input-server-path-p"/>
 					</td></tr>
 				</table>

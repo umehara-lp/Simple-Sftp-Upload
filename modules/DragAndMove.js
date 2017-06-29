@@ -22,7 +22,13 @@ define(function(require) {
 			dragZone = document.querySelector(obj.dragZone);
 			dragZone.style.cursor = "move";
 			dropZone.style.minHeight = dragZone.clientHeight + "px";
+			if(dropZone.querySelector(".modal-footer")){
+				dropZone.style.minHeight = dragZone.clientHeight + dropZone.querySelector(".modal-footer").clientHeight + 50 + "px";
+			}
 		}
+
+		set_height(dropZone);
+
 
 		dropZone.style.setProperty('overflow', 'hidden', 'important');
 
@@ -76,6 +82,7 @@ define(function(require) {
 					P_MANAGER.set("au.drag_and_move"+"_"+prefid+".h", dropZoneH + plusY + "px");
 					P_MANAGER.set("au.drag_and_move"+"_"+prefid+".x", dropZoneX + plusX / 2 + "px");
 					P_MANAGER.set("au.drag_and_move"+"_"+prefid+".y", dropZoneY + plusY / 2 + "px");
+					set_height(dropZone);
 				}
 			});
 		}
@@ -111,6 +118,21 @@ define(function(require) {
 				P_MANAGER.set("au.drag_and_move"+"_"+prefid+".y", dropZoneY + plusY + "px");
 			}
 		});
+	}
+
+	function set_height(dropZone){
+		var hiku_height = 0;
+		if(dropZone.querySelector(".modal-header")){
+			hiku_height += dropZone.querySelector(".modal-header").clientHeight;
+		}
+
+		if(dropZone.querySelector(".modal-footer")){
+			hiku_height += dropZone.querySelector(".modal-footer").clientHeight;
+		}
+
+		dropZone.querySelector(".modal-body").style.boxSizing = "border-box";
+		dropZone.querySelector(".modal-body").style.maxHeight = "none";
+		dropZone.querySelector(".modal-body").style.height = "calc(100% - " + hiku_height + "px)";
 	}
 
 	return {

@@ -18,15 +18,17 @@ define(function(require) {
 	
 	
 	/* savePrefs ------------------------------------------------------------ */
-	function savePrefs(config) {
+	function savePrefs(username,config) {
 		config = config.replace(/\\|\\/g, '/');
 		if(config.slice(-1) != "/")  config += "/";
+		P_MANAGER.set("_userName", username);
 		P_MANAGER.set("_storageLocation", config);
 	}
 	
 	
 	/* loadPrefs ------------------------------------------------------------ */
 	function loadPrefs() {
+		$dialog_configuration.find('.user_name').val(P_MANAGER.get("_userName"));
 		$dialog_configuration.find('.location_path').val(P_MANAGER.get("_storageLocation"));
 	}
 	
@@ -40,7 +42,7 @@ define(function(require) {
 		loadPrefs();
 		
 		$dialog_configuration.on( 'click', '.dialog-button-save', function() {
-			savePrefs($dialog_configuration.find( ".location_path" ).val());
+			savePrefs($dialog_configuration.find( ".user_name" ).val(), $dialog_configuration.find( ".location_path" ).val());
 		} );
 		
 		$dialog_configuration.on( 'click', '.dialog-button-reference', function() {
