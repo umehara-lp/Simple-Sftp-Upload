@@ -62,7 +62,11 @@ define(function(require, exports, module) {
 		
 		// add Context Menu
 		CommandManager.register(STRINGS.TXT_TEST_UPLOAD, menuId4, SFTP_MANAGER.uploadTestSite);
-		CommandManager.register(STRINGS.TXT_PRODUCTION_UPLOAD, menuId5, SFTP_MANAGER.uploadProductionSite);
+		CommandManager.register(STRINGS.TXT_PRODUCTION_UPLOAD, menuId5, function(){
+			if( window.confirm(STRINGS.TXT_PRODUCTION_ENVIRONMENT + " " + STRINGS.TXT_IS_IT_REALLY_GOOD)){
+				SFTP_MANAGER.uploadProductionSite();
+			}
+		});
 		CommandManager.register(STRINGS.TXT_ADD_MODIFY_LOG, menuId7, MF_MANAGER.setLog);
 		CommandManager.register(STRINGS.TXT_SELECT_UPLOAD, menuId9, SF_MANAGER.openDialog);
 		contextMenu.addMenuDivider();
