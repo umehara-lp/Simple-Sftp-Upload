@@ -197,11 +197,11 @@ define(function(require) {
 			mlog[contentJson[i]["path"]].push(contentJson[i]);
 		}
 		for(var key in mlog){
-			mlog[key].sort(function(a,b){
+			/*mlog[key].sort(function(a,b){
 				if(a.date > b.date) return -1;
 				if(a.date < b.date) return 1;
 				return 0;
-			});
+			});*/
 			for(var i=0;i<mlog[key].length;i++){
 				if(i == 0){
 					listHtml += '<tr><td class="p">' + mlog[key][i]["path"] + '</td><td class="d">' + mlog[key][i]["date"] + '</td><td class="u">' + mlog[key][i]["user"] + '</td></tr>';
@@ -212,6 +212,7 @@ define(function(require) {
 		}
 		$dialog_modify_log.find(".table-wrap tbody").html(listHtml);
 		listControl();
+		$dialog_modify_log.find("th.s-d").trigger("click");
 	}
 	
 	
@@ -220,9 +221,14 @@ define(function(require) {
 		
 		var projectRoot = ProjectManager.getProjectRoot(),
 			 folderPath = P_MANAGER.get("_storageLocation") + "mdify_log",
-			 filePath = P_MANAGER.get(projectRoot._path).replace(".prf", ".mfg"),
-			 fileEntry = FileSystem.getFileForPath( folderPath + "/" + filePath ),
+			 filePath,
+			 fileEntry,
 			 fileContent;
+		
+		if( !P_MANAGER.get(projectRoot._path) ) return false;
+		
+		filePath = P_MANAGER.get(projectRoot._path).replace(".prf", ".mfg");
+		fileEntry = FileSystem.getFileForPath( folderPath + "/" + filePath );
 		
 		fileEntry.exists( function( err, exists ) {
 			if ( exists ) {
@@ -275,11 +281,39 @@ define(function(require) {
 	}
 	
 	
+	/* setTableSort ------------------------------------------------------------ */
+	function setTableSort() {
+		
+		var $tg = $dialog_modify_log.find("th");
+		$tg.on("click", function(){
+			var $tg = $(this),
+				 tgCls = $tg.attr("class").replace("s-", ""),
+				 type = $tg.attr("data-type"),
+				 oder = $tg.attr("data-sortoder"),
+				 $tgs = $dialog_modify_log.find("tbody > tr");
+			
+			$tgs.sort(function(a,b){
+				var oderIndex = ( $(a).find("."+tgCls).text() > $(b).find("."+tgCls).text() ) ? 1 : -1;
+				return oderIndex * oder;
+			});
+			$dialog_modify_log.find("th span").html("");
+			var arrow = (oder == -1 ) ? "　▲" : "　▼";
+			$tg.find("span").html(arrow);
+			$tg.attr("data-sortoder", oder *= -1);
+			$dialog_modify_log.find("tbody").html($tgs);
+			listControl();
+		});
+		
+	}
+	
+	
 	/* openDialog ------------------------------------------------------------ */
 	function openDialog() {
 		
 		var dl = Dialogs.showModalDialogUsingTemplate(Mustache.render(dialog_modify_log_tmp, context));
 		$dialog_modify_log = dl.getElement();
+		
+		setTableSort();
 		
 		DRAG_AND_MOVE.drag_and_move(document.querySelector("#au-ssftp-dialog_modify_log"), { dragZone: ".modal-wrapper .modal-header", resizer: true });
 		
@@ -308,13 +342,13 @@ define(function(require) {
 			});
 			
 			$dialog_modify_log.find(".dialog-button-upload").click(function (e) {
-				if( window.confirm(STRINGS.TXT_IS_IT_REALLY_GOOD)){
+				if( window.confirm(STRINGS.TXT_PRODUCTION_ENVIRONMENT + " " + STRINGS.TXT_IS_IT_REALLY_GOOD)){
 					uploadList("production");
 				}
 			});
 			
 			$dialog_modify_log.find(".dialog-button-test-upload").click(function (e) {
-				if( window.confirm(STRINGS.TXT_IS_IT_REALLY_GOOD)){
+				if( window.confirm(STRINGS.TXT_TESTING_ENVIRONMENT + " " + STRINGS.TXT_IS_IT_REALLY_GOOD)){
 					uploadList("test");
 				}
 			});
@@ -351,8 +385,7 @@ define(function(require) {
 		addMenu: addMenu,
 		saveModifyLog: saveModifyLog,
 		setLog: setLog,
-		saveLog: saveLog,
-		saveLocal: saveLocal
+		saveLog: saveLog
 	};
 	
 });

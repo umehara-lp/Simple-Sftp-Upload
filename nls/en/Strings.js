@@ -11,6 +11,8 @@ define({
 	TXT_REFERENCE:	"Reference",
 	TXT_TEST_UPLOAD:	"[SSFTP] Upload to test environment",
 	TXT_TEST_UPLOAD2:	"Upload to test environment",
+	TXT_TEST_UPLOAD2:	"Upload to test environment",
+	TXT_SELECT_UPLOAD:	"[SSFTP] Upload selection file",
 	TXT_PRODUCTION_UPLOAD:	"[SSFTP] Upload to production environment",
 	TXT_PRODUCTION_UPLOAD2:	"Upload to production environment",
 	TXT_ADD_MODIFY_LOG:	"[SSFTP] Add to modify log",

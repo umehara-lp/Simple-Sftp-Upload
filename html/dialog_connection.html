@@ -5,7 +5,7 @@
 	<div class="modal-body">
 		<table>
 			<tr><th>{{MyStrings.TXT_CONNECTION_SETTING_NAME}}</th><td>
-				<input type="text" class="input-connecting-name" />　<span class="btn dialog-button-reference">{{MyStrings.TXT_CONNECTION_SETTING_LOAD}}</span>
+				<input type="text" class="input-connecting-name" /> <span class="btn dialog-button-reference">{{MyStrings.TXT_CONNECTION_SETTING_LOAD}}</span>
 			</td></tr>
 		</table>
 		<ul class="nav nav-tabs nav-justified">
@@ -23,7 +23,7 @@
 						</select>
 					</td></tr>
 					<tr class="ftp sftp local"><th>{{MyStrings.TXT_CONNECTION_HOST}}</th><td>
-						<input type="text" class="input-host"/> {{MyStrings.TXT_CONNECTION_PORT}} <input type="text" class="input-port" value="21"/>
+						<input type="text" class="input-host"/><span class="ftp sftp port"> {{MyStrings.TXT_CONNECTION_PORT}} <input type="text" class="input-port" value="21"/></span><span class="local port"> <span class="btn dialog-button-loadhost1">{{MyStrings.TXT_REFERENCE}}</span></span>
 					</td></tr>
 					<tr class="ftp sftp"><th>{{MyStrings.TXT_CONNECTION_USER_NAME}}</th><td>
 						<input type="text" class="input-username"/>
@@ -52,7 +52,7 @@
 						</select>
 					</td></tr>
 					<tr class="ftp sftp local"><th>{{MyStrings.TXT_CONNECTION_HOST}}</th><td>
-						<input type="text" class="input-host-p"/> {{MyStrings.TXT_CONNECTION_PORT}} <input type="text" class="input-port-p" value="21"/>
+						<input type="text" class="input-host-p"/><span class="ftp sftp port"> {{MyStrings.TXT_CONNECTION_PORT}} <input type="text" class="input-port-p" value="21"/></span><span class="local port"> <span class="btn dialog-button-loadhost2">{{MyStrings.TXT_REFERENCE}}</span></span>
 					</td></tr>
 					<tr class="ftp sftp"><th>{{MyStrings.TXT_CONNECTION_USER_NAME}}</th><td>
 						<input type="text" class="input-username-p"/>

@@ -169,7 +169,7 @@ define(function(require) {
 			$select.off("change");
 			$select.on("change",function(){
 				var tgCls = $select.find("option:selected").val();
-				$tg.find("tr").hide();
+				$tg.find("tr, .port").hide();
 				$tg.find("." + tgCls).show();
 			});
 			$tgs.find("select").trigger("change");
@@ -204,6 +204,18 @@ define(function(require) {
 			$dialog_connection.on( 'click', '.dialog-button-reference', function() {
 				FileSystem.showOpenDialog(false, false, STRINGS.TXT_CONNECTION_SETTING_LOAD, P_MANAGER.get("_storageLocation"), null, function(str, paths) {
 					loadConnectionSetting(paths[0]);
+				});
+			} );
+			
+			$dialog_connection.on( 'click', '.dialog-button-loadhost1', function() {
+				FileSystem.showOpenDialog(false, true, STRINGS.TXT_REFERENCE, null, null, function(str, paths) {
+					$dialog_connection.find( ".input-host" ).val(paths);
+				});
+			} );
+			
+			$dialog_connection.on( 'click', '.dialog-button-loadhost2', function() {
+				FileSystem.showOpenDialog(false, true, STRINGS.TXT_REFERENCE, null, null, function(str, paths) {
+					$dialog_connection.find( ".input-host-p" ).val(paths);
 				});
 			} );
 			

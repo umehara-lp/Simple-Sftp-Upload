@@ -1,9 +1,9 @@
 {
 	"name": "au.brackets-simple-sftp-upload",
 	"title": "Simple Sftp Upload",
-	"description": "Simple FTP / SFTP client. Can set up test environment / production environment / local folder, can upload by file unit / folder unit, can upload changed files automatically on Brackets, can write and read connection setting files. It is possible to read the connection setting file of Dreamwever. Change log function.",
+	"description": "Simple FTP / SFTP client. It is possible to set up test environment / production environment / local folder, upload in file unit / folder unit, uploaded files modified automatically on Brackets, can write and read connection setting files. It is possible to read the connection setting file of Dreamwever. Change log function, upload function of selected file",
 	"homepage": "https://github.com/umehara-lp/Simple-Sftp-Upload",
-	"version": "1.4.0",
+	"version": "1.4.2",
 	"keywords": ["sftp", "ftp", "local", "sync", "upload", "uploader", "simple", "log"],
 	"author": "Atsushi Umehara",
 	"license": "MIT",
@@ -16,7 +16,7 @@
 	],
 	"package-i18n": {
 		"ja":{
-			"description": "シンプルなFTP／SFTPクライアント。テスト環境／本番環境／ローカルフォルダの設定が可能、ファイル単位／フォルダ単位でのアップロードが可能、Brackets上で変更されたファイルを自動でアップロードが可能、接続設定ファイルの書き出し、読み込みが可能。Dreamweverの接続設定ファイルの読み込みが可能。変更ログ機能",
+			"description": "シンプルなFTP／SFTPクライアント。テスト環境／本番環境／ローカルフォルダの設定が可能、ファイル単位／フォルダ単位でのアップロードが可能、Brackets上で変更されたファイルを自動でアップロードが可能、接続設定ファイルの書き出し、読み込みが可能。Dreamweverの接続設定ファイルの読み込みが可能。変更ログ機能、選択範囲のファイルのアップロード機能",
 			"title": "簡単SFTP"
 		}
 	}

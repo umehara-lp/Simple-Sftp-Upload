@@ -9,6 +9,8 @@ define({
 	TXT_FTP_SETTING:	"FTP/SFTP設定",
 	TXT_FTP_LOG:	"FTP/SFTP接続ログ",
 	TXT_REFERENCE:	"参照",
+	TXT_SELECT_UPLOAD:	"【簡単SFTP】 選択範囲ファイルのアップロード",
+	TXT_SELECT_UPLOAD2:	"選択範囲ファイルのアップロード",
 	TXT_TEST_UPLOAD:	"【簡単SFTP】 テスト環境にアップロード",
 	TXT_TEST_UPLOAD2:	"テスト環境にアップロード",
 	TXT_PRODUCTION_UPLOAD:	"【簡単SFTP】 本番環境にアップロード",

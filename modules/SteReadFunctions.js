@@ -26,6 +26,8 @@ define(function(require, exports, module) {
 				moldedSte.method = "sftp";
 				moldedSte.port = 22;
 				moldedSte.password = ste.testingServer.passphrase;
+			} else if(ste.testingServer.accesstype === "lan") {
+				moldedSte.method = "local";
 			} else {
 				moldedSte.method = "ftp";
 				moldedSte.port = 21;
@@ -34,13 +36,19 @@ define(function(require, exports, module) {
 			if(ste.testingServer.port){
 				moldedSte.port = ste.testingServer.port;
 			}
-			moldedSte.host = ste.testingServer.host;
+			if(ste.testingServer.accesstype === "lan"){
+				moldedSte.host = ste.testingServer.remoteroot;
+			} else {
+				moldedSte.host = ste.testingServer.host;
+			}
 			moldedSte.username = ste.testingServer.user;
 			moldedSte.rsaPath = ste.testingServer.identityfileabsolutepath;
 			moldedSte.serverPath = ste.testingServer.remoteroot;
 			if(ste.save){
 				moldedSte.save = true;
 			}
+		}else{
+			moldedSte.method = "ftp";
 		}
 
 		if(ste.remoteServer){
@@ -48,6 +56,8 @@ define(function(require, exports, module) {
 				moldedSte.method_p = "sftp";
 				moldedSte.port_p = 22;
 				moldedSte.password_p = ste.remoteServer.passphrase;
+			} else if(ste.remoteServer.accesstype === "lan") {
+				moldedSte.method_p = "local";
 			} else {
 				moldedSte.method_p = "ftp";
 				moldedSte.port_p = 21;
@@ -56,10 +66,16 @@ define(function(require, exports, module) {
 			if(ste.remoteServer.port){
 				moldedSte.port_p = ste.remoteServer.port;
 			}
-			moldedSte.host_p = ste.remoteServer.host;
+			if(ste.remoteServer.accesstype === "lan"){
+				moldedSte.host_p = ste.remoteServer.remoteroot;
+			} else {
+				moldedSte.host_p = ste.remoteServer.host;
+			}
 			moldedSte.username_p = ste.remoteServer.user;
 			moldedSte.rsaPath_p = ste.remoteServer.identityfileabsolutepath;
 			moldedSte.serverPath_p = ste.remoteServer.remoteroot;
+		}else{
+			moldedSte.method_p = "ftp";
 		}
 
 		callback(moldedSte);
@@ -123,7 +139,7 @@ define(function(require, exports, module) {
 			var serverType = false;
 			serverType = server.getAttribute("servertype");
 			var accesstype = server.getAttribute("accesstype");
-			if(!serverType || accesstype === "lan"){
+			if(!serverType){
 				return;
 			} else {
 				rtn[serverType] = {};
