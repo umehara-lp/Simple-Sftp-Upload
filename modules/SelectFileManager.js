@@ -175,13 +175,15 @@ define(function(require) {
 		$dialog_select_file.find(".dialog-button-upload").click(function (e) {
 			if( window.confirm(STRINGS.TXT_PRODUCTION_ENVIRONMENT + " " + STRINGS.TXT_IS_IT_REALLY_GOOD)){
 				uploadList("production");
+				dl.close();
 			}
 		});
 
 		$dialog_select_file.find(".dialog-button-test-upload").click(function (e) {
-			if( window.confirm(STRINGS.TXT_TESTING_ENVIRONMENT + " " + STRINGS.TXT_IS_IT_REALLY_GOOD)){
+			//if( window.confirm(STRINGS.TXT_TESTING_ENVIRONMENT + " " + STRINGS.TXT_IS_IT_REALLY_GOOD)){
 				uploadList("test");
-			}
+				dl.close();
+			//}
 		});
 
 		$dialog_select_file.find(".dialog-button-local-save").click(function (e) {
