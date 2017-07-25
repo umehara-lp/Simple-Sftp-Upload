@@ -11,6 +11,7 @@ define(function(require) {
 		
 		 P_MANAGER						= require("modules/PreferencesManager"),
 		 CF_MANAGER						= require("modules/ConfigurationManager"),
+		 FL_MANAGER						= require("modules/FtpLogManager"),
 		 STRINGS							= require("modules/Strings"),
 		 SteReadFunctions				= require("modules/SteReadFunctions"),
 		 DRAG_AND_MOVE					= require("modules/DragAndMove"),
@@ -43,6 +44,7 @@ define(function(require) {
 		if(settings.save){
 			$dialog_connection.find('.input-save').prop('checked', true);
 		}
+		$dialog_connection.find('.input-site-url').val(settings.siteUrl);
 		
 		$dialog_connection.find('.input-method-p').val(settings.method_p);
 		$dialog_connection.find('.input-host-p').val(settings.host_p);
@@ -51,6 +53,7 @@ define(function(require) {
 		$dialog_connection.find('.input-rsa-path-p').val(settings.rsaPath_p);
 		$dialog_connection.find('.input-password-p').val(settings.password_p);
 		$dialog_connection.find('.input-server-path-p').val(settings.serverPath_p);
+		$dialog_connection.find('.input-site-url-p').val(settings.siteUrl_p);
 		
 	}
 	
@@ -69,6 +72,7 @@ define(function(require) {
 			password:			$dialog_connection.find('.input-password').val(),
 			serverPath:			pathExchange($dialog_connection.find('.input-server-path').val(), "through", "true"),
 			save:					$dialog_connection.find('.input-save').is(':checked'),
+			siteUrl:				$dialog_connection.find('.input-site-url').val(),
 			
 			method_p:			$dialog_connection.find('.input-method-p').val(),
 			host_p:				pathExchange($dialog_connection.find('.input-host-p').val(), "false", "false"),
@@ -76,7 +80,8 @@ define(function(require) {
 			username_p:			$dialog_connection.find('.input-username-p').val(),
 			rsaPath_p:			pathExchange($dialog_connection.find('.input-rsa-path-p').val(), "false", "false"),
 			password_p:			$dialog_connection.find('.input-password-p').val(),
-			serverPath_p:		pathExchange($dialog_connection.find('.input-server-path-p').val(), "through", "true")
+			serverPath_p:		pathExchange($dialog_connection.find('.input-server-path-p').val(), "through", "true"),
+			siteUrl_p:			$dialog_connection.find('.input-site-url-p').val()
 		};
 		
 	}
@@ -111,11 +116,13 @@ define(function(require) {
 			 fileName = newSettings.connectingName + ".prf",
 			 fileEntry = FileSystem.getFileForPath( P_MANAGER.get("_storageLocation") + fileName );
 		
-		newSettings["prfver"] = "1";
+		newSettings["prfver"] = "1.1";
 		
 		FileUtils.writeText( fileEntry, JSON.stringify( newSettings, null, '\t' ), true ).done( function() {} );
 		
 		savePrefs(fileName);
+		
+		FL_MANAGER.setLink();
 		
 	}
 	

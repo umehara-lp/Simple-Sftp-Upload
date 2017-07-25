@@ -50,15 +50,15 @@ define(function(require, exports, module) {
 		}
 		
 		// add Menu
-		CS_MANAGER.addMenu(menu, menuId2);
-		menu.addMenuDivider();
 		CF_MANAGER.addMenu(menu, menuId1);
+		menu.addMenuDivider();
+		CS_MANAGER.addMenu(menu, menuId2);
 		menu.addMenuDivider();
 		SFTP_SV_MANAGER.addMenu(menu, menuId6);
 		menu.addMenuDivider();
-		FL_MANAGER.addMenu(menu, menuId3);
-		menu.addMenuDivider();
 		MF_MANAGER.addMenu(menu, menuId8);
+		menu.addMenuDivider();
+		FL_MANAGER.addMenu(menu, menuId3);
 		
 		// add Context Menu
 		CommandManager.register(STRINGS.TXT_TEST_UPLOAD, menuId4, SFTP_MANAGER.uploadTestSite);

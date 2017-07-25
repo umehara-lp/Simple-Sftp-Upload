@@ -22,6 +22,7 @@ define(function(require, exports, module) {
 		moldedSte.connectingName = ste.siteName;
 
 		if(ste.testingServer){
+			moldedSte.siteUrl = ste.testingServer.weburl;
 			if(ste.testingServer.useSFTP === "TRUE"){
 				moldedSte.method = "sftp";
 				moldedSte.port = 22;
@@ -47,11 +48,13 @@ define(function(require, exports, module) {
 			if(ste.save){
 				moldedSte.save = true;
 			}
+			
 		}else{
 			moldedSte.method = "ftp";
 		}
 
 		if(ste.remoteServer){
+			moldedSte.siteUrl_p = ste.remoteServer.weburl;
 			if(ste.remoteServer.useSFTP === "TRUE"){
 				moldedSte.method_p = "sftp";
 				moldedSte.port_p = 22;
@@ -74,6 +77,7 @@ define(function(require, exports, module) {
 			moldedSte.username_p = ste.remoteServer.user;
 			moldedSte.rsaPath_p = ste.remoteServer.identityfileabsolutepath;
 			moldedSte.serverPath_p = ste.remoteServer.remoteroot;
+			
 		}else{
 			moldedSte.method_p = "ftp";
 		}
@@ -134,7 +138,19 @@ define(function(require, exports, module) {
 		rtn.siteName = siteName;
 		var servers = document.querySelectorAll("#xml_reader server");
 		//console.log(servers.length);
-		var attrArray = ["name", "accesstype", "host", "remoteroot", "user", "pw", "passphrase", "usepasv", "useSFTP", "identityfileabsolutepath"];
+		var attrArray = [
+			"name",
+			"accesstype",
+			"host",
+			"remoteroot",
+			"user",
+			"pw",
+			"passphrase",
+			"usepasv",
+			"useSFTP",
+			"identityfileabsolutepath",
+			"weburl"
+		];
 		[].forEach.call(servers, function(server, i, arr) {
 			var serverType = false;
 			serverType = server.getAttribute("servertype");
@@ -149,6 +165,9 @@ define(function(require, exports, module) {
 						return;
 					}
 					var gettedAttr = server.getAttribute(attr);
+					if (attr === "weburl" && !/^http(s|):\/\/.+?/.test(gettedAttr)) {
+						return;
+					}
 					if (attr === "pw" || attr === "passphrase") {
 						gettedAttr = decode_pw(gettedAttr);
 					}

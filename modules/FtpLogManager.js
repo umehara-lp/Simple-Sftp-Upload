@@ -1,11 +1,14 @@
 define(function(require) {
 	"use strict";
 	
-	var Strings							= brackets.getModule("strings"),
+	var AppInit							= brackets.getModule("utils/AppInit"),
+		 Strings							= brackets.getModule("strings"),
 		 CommandManager				= brackets.getModule("command/CommandManager"),
 		 WorkspaceManager				= brackets.getModule("view/WorkspaceManager"),
 		 Mustache						= brackets.getModule("thirdparty/mustache/mustache"),
+		 ProjectManager				= brackets.getModule("project/ProjectManager"),
 		
+		 CS_MANAGER,
 		 STRINGS							= require("modules/Strings"),
 		 
 		 dialog_ftp_log_tmp			= require("text!html/dialog_ftp_log.html"),
@@ -57,6 +60,21 @@ define(function(require) {
 		
 	}
 	
+	/* setLink ------------------------------------------------------------ */
+	function setLink(){
+		
+		$panel.find(".btn-test").hide();
+		$panel.find(".btn-production").hide();
+		
+		CS_MANAGER.getConnectionSetting(function(val){
+			var seiteUrl = val.siteUrl, siteUrl_p = val.siteUrl_p;
+			if(seiteUrl) $panel.find(".btn-test").attr("href", seiteUrl).show();
+			if(siteUrl_p) $panel.find(".btn-production").attr("href", siteUrl_p).show();
+		});
+		
+	}
+	
+	
 	/* addMenu ------------------------------------------------------------ */
 	function addMenu(menu, mid){
 		
@@ -71,7 +89,21 @@ define(function(require) {
 			panelToggle();
 		} );
 		
+		setLink();
+		
 	}
+	
+	
+	/* init ------------------------------------------------------------ */
+	AppInit.appReady( function() {
+		
+		CS_MANAGER = require("modules/ConnectionSettingManager");
+		
+		ProjectManager.on("projectOpen", function() {
+			setLink();
+		});
+		
+	});
 	
 	
 	/* return ------------------------------------------------------------ */
@@ -79,7 +111,8 @@ define(function(require) {
 		addMenu: addMenu,
 		outputLog: outputLog,
 		panelOpen: panelOpen,
-		panelClose: panelClose
+		panelClose: panelClose,
+		setLink: setLink
 	};
 	
 });
