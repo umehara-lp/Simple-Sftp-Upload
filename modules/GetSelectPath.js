@@ -17,12 +17,17 @@ define(function() {
 		//プロジェクト内のディレクトリ部分をスラッシュ区切りで分割してディレクトリの配列を作る。
 		var editor = EditorManager.getCurrentFullEditor(),
 			selectTxt = editor.getSelectedText(true);
+
 		var urlArr = [];
 		selectTxt.replace(/(src=("|')(.*?)("|'))|(url\(("|'|)(.*?)("|'|)\))/g, function(matched,  src, srcQ1, srcPath, srcQ2, url, urlQ1, urlPath){
-			var changedPath = changeToAbsPath(srcPath || urlPath);
 			//文字列の中からsrcかurlの中身を取ってきて、絶対パスに変換する。
-			if(changedPath.slice(0, 1) == "/")  changedPath = changedPath.substr(1);
-			if(changedPath){ urlArr.push(changedPath); }//falseじゃなければ配列に追加。
+			var changedPath = changeToAbsPath(srcPath || urlPath);
+			if(changedPath){//falseじゃなければ
+				if(changedPath.slice(0, 1) == "/")  changedPath = changedPath.substr(1);
+				//スラッシュ取って
+				urlArr.push(changedPath);
+				//配列に追加。
+			}
 		});
 		if (urlArr.length === 0) {return false;}//ない場合
 		return urlArr;

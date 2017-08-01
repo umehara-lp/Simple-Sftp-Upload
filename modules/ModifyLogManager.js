@@ -29,7 +29,7 @@ define(function(require) {
 		var ndate = 'YYYY-MM-DD hh:mm:ss',
 		date = new Date();
 		ndate = ndate.replace(/YYYY/g, date.getFullYear());
-		ndate = ndate.replace(/MM/g, date.getMonth());
+		ndate = ndate.replace(/MM/g, date.getMonth()+1);
 		ndate = ndate.replace(/DD/g, date.getDate());
 		ndate = ndate.replace(/hh/g, date.getHours());
 		ndate = ndate.replace(/mm/g, date.getMinutes());

@@ -38,7 +38,7 @@ define(function(require) {
 					var fileEntry = projectUrl + localPath,
 						 saveEntry = savePath + "/" + localPath;
 					_nodeDomain2.exec('save',fileEntry, saveEntry).done(function(){
-						
+					
 					}).fail(function(err){
 						console.log("err");
 					});
