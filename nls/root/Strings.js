@@ -68,7 +68,9 @@ define({
 	TXT_RECRNT_CHANGE_FILE_2:	"The last modified period is",
 	TXT_RECRNT_CHANGE_FILE_3:	"Within days",
 	TXT_SEARCH:	"Search",
-	TXT_SEARCHING:	"Searching"
+	TXT_SEARCHING:	"Searching",
+	TXT_TARGET_FORDER:	"Target folder",
+	TXT_EXCLUSION:	"Exclusion"
 	
 	
 	

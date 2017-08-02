@@ -68,6 +68,8 @@ define({
 	TXT_RECRNT_CHANGE_FILE_2:	"最後に修正された期間が",
 	TXT_RECRNT_CHANGE_FILE_3:	"日以内",
 	TXT_SEARCH:	"検索",
-	TXT_SEARCHING:	"検索中…"
+	TXT_SEARCHING:	"検索中…",
+	TXT_TARGET_FORDER:"対象フォルダ",
+	TXT_EXCLUSION:	"除外"
 	
 });

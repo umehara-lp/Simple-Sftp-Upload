@@ -3,7 +3,7 @@
 	"title": "Simple Sftp Upload",
 	"description": "Added search function to recently modified files.Simple FTP / SFTP client. It is possible to set up test environment / production environment / local folder, upload in file unit / folder unit, uploaded files modified automatically on Brackets, can write and read connection setting files. It is possible to read the connection setting file of Dreamwever. Change log function, upload function of selected file",
 	"homepage": "https://github.com/umehara-lp/Simple-Sftp-Upload",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"keywords": ["sftp", "ftp", "local", "sync", "upload", "uploader", "simple", "log"],
 	"author": "Atsushi Umehara",
 	"license": "MIT",
