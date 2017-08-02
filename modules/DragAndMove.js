@@ -89,6 +89,9 @@ define(function(require) {
 
 
 		dragZone.addEventListener("mousedown", function(e) {
+			if(/^(button|input)$/i.test(e.target.tagName)){
+				return;
+			}
 			dragMode = true;
 			x = e.clientX;
 			y = e.clientY;

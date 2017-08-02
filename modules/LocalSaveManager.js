@@ -42,6 +42,7 @@ define(function(require) {
 					}).fail(function(err){
 						console.log("err");
 					});
+					
 				}
 				
 			});
@@ -56,7 +57,7 @@ define(function(require) {
 				console.log("err");
 			});
 		}
-		
+
 	}
 	
 	

@@ -1,0 +1,26 @@
+<div id="au-ssftp-dialog_recently_changed_files" class="modal">
+	<div class="modal-header">
+		<h1 class="dialog-title"><small>{{MyStrings.EXTENSION_NAME}} - </small>{{MyStrings.TXT_RECRNT_CHANGE_FILE_SEARCH}}</h1>
+		<div class="btw">
+			<p class="bt1"><button class="btn btn-update">{{MyStrings.TXT_UN_SELECT}}</button></p>
+			<p class="bt1"><button class="btn btn-all-select">{{MyStrings.TXT_ALL_SELECT}}</button></p>
+			<p class="bt2">対象フォルダ : <input type="text" class="input-target"/>　除外 : <input type="text" class="input-exclusion" value=".DS_Store,_notes,dwsync.xml"/>　{{MyStrings.TXT_RECRNT_CHANGE_FILE_2}} <input type="text" class="input-day"/> {{MyStrings.TXT_RECRNT_CHANGE_FILE_3}} <button class="btn btn-search">{{MyStrings.TXT_SEARCH}}</button><span class="btn btn-searching">{{MyStrings.TXT_SEARCHING}}</span></p>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div class="table-wrap">
+			<table>
+				<thead>
+					<tr><th class="s-p" data-type=“string” data-sortoder=-1>{{MyStrings.TXT_MF_PATH}}<span></span></th><th class="s-d" data-type=“string” data-sortoder=-1>{{MyStrings.TXT_MF_DATE}}<span></span></th></tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="dialog-button dialog-cancel btn">{{Strings.CANCEL}}</button>
+		<button class="btn danger dialog-button-upload">{{ MyStrings.TXT_PRODUCTION_UPLOAD2 }}</button>
+		<button class="btn primary dialog-button-test-upload">{{ MyStrings.TXT_TEST_UPLOAD2 }}</button>
+		<button class="btn update dialog-button-local-save">{{ MyStrings.TXT_LOCAL_SAVE }}</button>
+	</div>
+</div>

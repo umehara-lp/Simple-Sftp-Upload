@@ -17,6 +17,7 @@ define(function(require, exports, module) {
 		 MF_MANAGER				= require("modules/ModifyLogManager"),
 		 SF_MANAGER				= require("modules/SelectFileManager"),
 		 LS_MANAGER				= require("modules/LocalSaveManager"),
+		 RCF_MANAGER			= require("modules/RecentlyChangedFilesManager"),
 		 STRINGS					= require("modules/Strings"),
 		
 		 packageJSON			= require("text!package.json"),
@@ -43,7 +44,8 @@ define(function(require, exports, module) {
 			 menuId6 = packageName + ".menu6",
 			 menuId7 = packageName + ".menu7",
 			 menuId8 = packageName + ".menu8",
-			 menuId9 = packageName + ".menu9";
+			 menuId9 = packageName + ".menu9",
+			 menuId10 = packageName + ".menu10";
 		
 		if(!menu) {
 			menu = Menus.addMenu(STRINGS.EXTENSION_NAME, packageName, Menus.BEFORE, Menus.AppMenuBar.HELP_MENU);
@@ -57,6 +59,8 @@ define(function(require, exports, module) {
 		SFTP_SV_MANAGER.addMenu(menu, menuId6);
 		menu.addMenuDivider();
 		MF_MANAGER.addMenu(menu, menuId8);
+		menu.addMenuDivider();
+		RCF_MANAGER.addMenu(menu, menuId10);
 		menu.addMenuDivider();
 		FL_MANAGER.addMenu(menu, menuId3);
 		
@@ -96,6 +100,7 @@ define(function(require, exports, module) {
 		SFTP_MANAGER.init(_nodeDomain);
 		SFTP_SV_MANAGER.init(_nodeDomain);
 		LS_MANAGER.init(_nodeDomain2);
+		RCF_MANAGER.init(_nodeDomain2);
 		
 		if(!P_MANAGER.get("_storageLocation")) {
 			CF_MANAGER.openDialog();

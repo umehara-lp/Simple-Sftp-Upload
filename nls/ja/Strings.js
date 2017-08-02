@@ -63,6 +63,11 @@ define({
 	TXT_UN_SELECT:	"選択解除",
 	TXT_ERROR_MF:	"接続設定名を先に設定してください。",
 	TXT_SAVE_LOCAL_PATH:	"保存フォルダを選択",
-	TXT_IS_IT_REALLY_GOOD:	"本当にいいですか？"
+	TXT_IS_IT_REALLY_GOOD:	"本当にいいですか？",
+	TXT_RECRNT_CHANGE_FILE_SEARCH:	"最近修正したファイルを検索",
+	TXT_RECRNT_CHANGE_FILE_2:	"最後に修正された期間が",
+	TXT_RECRNT_CHANGE_FILE_3:	"日以内",
+	TXT_SEARCH:	"検索",
+	TXT_SEARCHING:	"検索中…"
 	
 });

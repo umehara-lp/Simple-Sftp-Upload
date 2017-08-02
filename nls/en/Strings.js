@@ -63,7 +63,12 @@ define({
 	TXT_UN_SELECT:	"Deselect",
 	TXT_ERROR_MF:	"Please set the connection setting name first.",
 	TXT_SAVE_LOCAL_PATH:	"Select save folder",
-	TXT_IS_IT_REALLY_GOOD:	"Is it really good?"
+	TXT_IS_IT_REALLY_GOOD:	"Is it really good?",
+	TXT_RECRNT_CHANGE_FILE_SEARCH:	"Search recently modified files",
+	TXT_RECRNT_CHANGE_FILE_2:	"The last modified period is",
+	TXT_RECRNT_CHANGE_FILE_3:	"Within days",
+	TXT_SEARCH:	"Search",
+	TXT_SEARCHING:	"Searching"
 	
 	
 	
