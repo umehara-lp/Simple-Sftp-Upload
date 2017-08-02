@@ -192,10 +192,13 @@ define(function(require) {
 		
 		listHtml = '';
 		
+		Array.prototype.getLastVal = function (){ return this[this.length -1];}
+		
 		for(var i=0;i<contentJson.length;i++){
 			if(!(contentJson[i]["path"] in mlog)) mlog[contentJson[i]["path"]] = [];
 			mlog[contentJson[i]["path"]].push(contentJson[i]);
 		}
+		console.log(mlog);
 		for(var key in mlog){
 			/*mlog[key].sort(function(a,b){
 				if(a.date > b.date) return -1;
@@ -204,7 +207,8 @@ define(function(require) {
 			});*/
 			for(var i=0;i<mlog[key].length;i++){
 				if(i == 0){
-					listHtml += '<tr><td class="p">' + mlog[key][i]["path"] + '</td><td class="d">' + mlog[key][i]["date"] + '</td><td class="u">' + mlog[key][i]["user"] + '</td></tr>';
+					var lastDate = mlog[key].getLastVal();
+					listHtml += '<tr><td class="p">' + lastDate["path"] + '</td><td class="d">' + lastDate["date"] + '</td><td class="u">' + lastDate["user"] + '</td></tr>';
 				}else{
 					
 				}
