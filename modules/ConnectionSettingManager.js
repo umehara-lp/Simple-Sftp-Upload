@@ -51,7 +51,7 @@ define(function(require) {
 		$dialog_connection.find('.input-username-p').val(settings.username_p);
 		$dialog_connection.find('.input-rsa-path-p').val(settings.rsaPath_p);
 		$dialog_connection.find('.input-password-p').val(settings.password_p);
-		$dialog_connection.find('.input-local-path').val(settings.localPath_p);
+		$dialog_connection.find('.input-local-path-p').val(settings.localPath_p);
 		$dialog_connection.find('.input-server-path-p').val(settings.serverPath_p);
 		
 	}
