@@ -5,6 +5,6 @@ define( function( require, exports, module ) {
 		root:true,
 		en: true,
 		ja: true,
-        de: true
+		de: true
 	};
 } );
