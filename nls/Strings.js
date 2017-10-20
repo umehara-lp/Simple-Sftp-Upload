@@ -4,6 +4,7 @@ define( function( require, exports, module ) {
 	module.exports = {
 		root:true,
 		en: true,
-		ja: true
+		ja: true,
+        de: true
 	};
 } );
